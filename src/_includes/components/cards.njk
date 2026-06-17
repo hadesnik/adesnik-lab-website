@@ -1,0 +1,66 @@
+{# Shared component macros: avatars, member cards, publication items #}
+
+{%- macro initials(name) -%}
+  {%- set parts = name | trim | string -%}
+  {%- set words = parts.split(" ") -%}
+  {%- if words.length > 1 -%}
+    {{ (words[0][0] ~ words[words.length - 1][0]) | upper }}
+  {%- else -%}
+    {{ words[0][0] | upper }}
+  {%- endif -%}
+{%- endmacro -%}
+
+{%- macro memberCard(person) -%}
+<article class="person">
+  <div class="person__media">
+    {% if person.photo %}
+      <img src="{{ person.photo }}" alt="Portrait of {{ person.name }}" loading="lazy" width="400" height="400" />
+    {% else %}
+      <span class="person__avatar" aria-hidden="true">{{ initials(person.name) }}</span>
+    {% endif %}
+  </div>
+  <div class="person__body">
+    <h3 class="person__name">{{ person.name }}</h3>
+    <p class="person__role">{{ person.role }}{% if person.note %} <span class="person__note">· {{ person.note }}</span>{% endif %}</p>
+    {% if person.bio %}<p class="person__bio">{{ person.bio }}</p>{% endif %}
+    {% if person.links and person.links.length %}
+      <ul class="person__links">
+        {% for label, href in person.links %}
+          <li><a href="{{ href }}">{{ label }}</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</article>
+{%- endmacro -%}
+
+{%- macro alumnusCard(person) -%}
+<article class="alum">
+  <span class="alum__avatar" aria-hidden="true">
+    {% if person.photo %}<img src="{{ person.photo }}" alt="" loading="lazy" />{% else %}{{ initials(person.name) }}{% endif %}
+  </span>
+  <div>
+    <h3 class="alum__name">{{ person.name }}</h3>
+    {% if person.current %}<p class="alum__current">{{ person.current }}</p>{% endif %}
+  </div>
+</article>
+{%- endmacro -%}
+
+{%- macro pubItem(pub) -%}
+<li class="pub" data-search="{{ (pub.title ~ ' ' ~ pub.authors ~ ' ' ~ pub.journal ~ ' ' ~ pub.year) | lower }}">
+  <span class="pub__year">{{ pub.year }}</span>
+  <div>
+    <p class="pub__title">
+      {%- set link = pub | pubLink -%}
+      {% if link %}<a href="{{ link }}">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}
+    </p>
+    <p class="pub__meta">{{ pub.authors }} · <span class="pub__journal">{{ pub.journal }}</span>{% if pub.volume %} {{ pub.volume }}{% endif %}</p>
+    {% if pub.doi or pub.pmid %}
+      <p class="pub__links">
+        {% if pub.doi %}<a href="https://doi.org/{{ pub.doi }}">DOI</a>{% endif %}
+        {% if pub.pmid %}<a href="https://pubmed.ncbi.nlm.nih.gov/{{ pub.pmid }}/">PubMed</a>{% endif %}
+      </p>
+    {% endif %}
+  </div>
+</li>
+{%- endmacro -%}

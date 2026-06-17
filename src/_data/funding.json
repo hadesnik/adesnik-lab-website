@@ -1,0 +1,19 @@
+{
+  "intro": "We gratefully acknowledge the agencies and foundations whose support makes our research possible.",
+  "sources": [
+    { "name": "NIH BRAIN Initiative", "url": "https://braininitiative.nih.gov", "logo": "/assets/images/funders/nih-brain-initiative.jpg" },
+    { "name": "National Eye Institute (NIH)", "url": "https://www.nei.nih.gov", "logo": "/assets/images/funders/nei.svg" },
+    { "name": "NIH Director's New Innovator Award", "url": "https://commonfund.nih.gov/newinnovator" },
+    { "name": "Weill Neurohub", "url": "https://www.weillneurohub.org" },
+    { "name": "DARPA", "url": "https://www.darpa.mil", "logo": "/assets/images/funders/darpa.png" },
+    { "name": "Brain Research Foundation", "url": "https://www.thebrf.org", "logo": "/assets/images/funders/brain-research-foundation.svg" },
+    { "name": "McKnight Endowment Fund for Neuroscience", "url": "https://www.mcknight.org", "logo": "/assets/images/funders/mcknight.jpg" },
+    { "name": "Arnold and Mabel Beckman Foundation", "url": "https://www.beckman-foundation.org" },
+    { "name": "New York Stem Cell Foundation", "url": "https://nyscf.org" },
+    { "name": "The Whitehall Foundation", "url": "https://www.whitehall.org" },
+    { "name": "Shurl and Kay Curci Foundation", "url": null },
+    { "name": "ADAPT (psychedelic therapies research)", "url": null },
+    { "name": "Mary Elizabeth Rennie Endowment", "url": null },
+    { "name": "The Winkler Family", "url": null }
+  ]
+}

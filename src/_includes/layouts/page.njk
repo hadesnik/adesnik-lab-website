@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+---
+
+<section
+  class="page-hero {% if heroImage %}page-hero--image{% endif %}"
+  {% if heroImage %}style="background-image:url('{{ heroImage }}')"{% endif %}
+>
+  <div class="wrap">
+    {% if eyebrow %}<p class="eyebrow">{{ eyebrow }}</p>{% endif %}
+    <h1>{{ title }}</h1>
+    {% if intro %}<p class="page-hero__intro">{{ intro }}</p>{% endif %}
+  </div>
+</section>
+
+{{ content | safe }}

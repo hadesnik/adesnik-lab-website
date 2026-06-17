@@ -1,0 +1,49 @@
+{
+  "groups": [
+    {
+      "id": "pi",
+      "title": "Principal Investigator",
+      "people": [
+        {
+          "name": "Hillel Adesnik",
+          "role": "Principal Investigator",
+          "photo": "/assets/images/hillel-adesnik.jpeg",
+          "bio": null,
+          "links": {}
+        }
+      ]
+    },
+    {
+      "id": "postdocs",
+      "title": "Postdoctoral Fellows",
+      "people": [
+        { "name": "Lamiae Abdeladim", "role": "Postdoctoral Fellow", "photo": "/assets/images/lamiae-abdeladim.jpg", "bio": null, "links": {} },
+        { "name": "Conor Dorian", "role": "Postdoctoral Fellow", "photo": "/assets/images/conor-dorian.jpg", "bio": null, "links": {} },
+        { "name": "Uday Jagadisan", "role": "Postdoctoral Fellow", "photo": "/assets/images/uday-jagadisan.jpg", "bio": null, "links": {} },
+        { "name": "Mora Ogando", "role": "Postdoctoral Fellow", "photo": "/assets/images/mora-ogando.jpg", "bio": null, "links": {} },
+        { "name": "Masato Sadahiro", "role": "Postdoctoral Fellow", "photo": "/assets/images/masato-sadahiro.jpg", "bio": null, "links": {} },
+        { "name": "Kevin Sit", "role": "Postdoctoral Fellow", "photo": "/assets/images/kevin-sit.jpg", "bio": null, "links": {} },
+        { "name": "Savitha Sridharan", "role": "Postdoctoral Fellow", "photo": "/assets/images/savitha-sridharan.jpg", "bio": null, "links": {} },
+        { "name": "Andrea Zazzi", "role": "Postdoctoral Fellow", "photo": "/assets/images/andrea-zazzi.jpg", "bio": null, "links": {} }
+      ]
+    },
+    {
+      "id": "phd",
+      "title": "PhD Students",
+      "people": [
+        { "name": "Courtney Kim", "role": "PhD Student", "photo": "/assets/images/courtney-kim.jpg", "bio": null, "links": {} },
+        { "name": "Ravi Srinivasan", "role": "PhD Student", "photo": "/assets/images/ravi-srinivasan.jpg", "bio": null, "links": {} },
+        { "name": "Genesis Ferrer Imbert", "role": "PhD Student", "note": "Joint with the Ji Lab", "photo": "/assets/images/genesis-ferrer-imbert.jpg", "bio": null, "links": {} },
+        { "name": "Madi McCloud", "role": "PhD Student", "note": "Joint with the Brohawn Lab", "photo": "/assets/images/madi-mccloud.jpg", "bio": null, "links": {} }
+      ]
+    },
+    {
+      "id": "staff",
+      "title": "Research Staff",
+      "people": [
+        { "name": "Janine Beyer", "role": "Research Associate", "photo": "/assets/images/janine-beyer.jpg", "bio": null, "links": {} },
+        { "name": "Karthika Gopakumar", "role": "Research Associate", "photo": "/assets/images/karthika-gopakumar.jpg", "bio": null, "links": {} }
+      ]
+    }
+  ]
+}

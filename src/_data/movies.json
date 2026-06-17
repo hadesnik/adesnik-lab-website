@@ -1,0 +1,33 @@
+{
+  "intro": "A few movies from our microscopes — neural activity and imaging from the lab.",
+  "items": [
+    {
+      "src": "/assets/videos/two-photon-imaging.mp4",
+      "poster": "/assets/videos/two-photon-imaging.jpg",
+      "title": "Two-photon imaging",
+      "caption": "",
+      "autoplay": true
+    },
+    {
+      "src": "/assets/videos/elevation-map-5x.mp4",
+      "poster": "/assets/videos/elevation-map-5x.jpg",
+      "title": "Cortical elevation map (5× speed)",
+      "caption": "",
+      "autoplay": true
+    },
+    {
+      "src": "/assets/videos/asap-voltage-imaging.mp4",
+      "poster": "/assets/videos/asap-voltage-imaging.jpg",
+      "title": "Voltage imaging",
+      "caption": "",
+      "autoplay": true
+    },
+    {
+      "src": "/assets/videos/elevation-map-3hz.mp4",
+      "poster": "/assets/videos/elevation-map-3hz.jpg",
+      "title": "Cortical elevation map (first pass, 3 Hz)",
+      "caption": "",
+      "autoplay": true
+    }
+  ]
+}

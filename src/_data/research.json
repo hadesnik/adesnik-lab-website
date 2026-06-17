@@ -1,0 +1,23 @@
+{
+  "intro": "Our brain is responsible for all our perceptions, thoughts, and actions. How is it that a collection of neurons and their synapses gives rise to all of animal and human behavior? The Adesnik Lab studies how cortical microcircuits process sensory information to generate perception. We combine optical technologies with quantitative behavior to develop optical brain–machine interfaces that read and write neural activity with cellular resolution and millisecond precision across large volumes of the brain.",
+  "themes": [
+    {
+      "title": "Visual Cortical Processing",
+      "summary": "How do neural circuits enable visual recognition, tracking, and scene segmentation? We use large-scale recordings and targeted optical perturbations in rodents — and higher species — to dissect how cortical microcircuits transform sensory input into perception.",
+      "image": "/assets/images/research-visual-cortex.jpg",
+      "imageAlt": "Green fluorescent neurons imaged in the visual cortex"
+    },
+    {
+      "title": "Visual learning & memory",
+      "summary": "We develop all-optical electrophysiology to map synaptic changes across thousands of neurons over an animal's lifespan, asking how learning reshapes the neural networks that support object recognition and memory.",
+      "image": "/assets/images/research-learning-memory.jpg",
+      "imageAlt": "Neurons co-expressing a green calcium indicator and a red optogenetic actuator for all-optical control"
+    },
+    {
+      "title": "Sensory experience",
+      "summary": "How does sensory processing give rise to conscious experience? Using visual illusions, precise neural perturbations, and behavioral psychophysics, we probe the brain's internal model and the link between cortical activity and what an animal perceives.",
+      "image": "/assets/images/research-subjective-experience.jpg",
+      "imageAlt": "Fluorescently labeled cortical neurons"
+    }
+  ]
+}

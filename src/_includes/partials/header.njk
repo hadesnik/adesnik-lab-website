@@ -1,0 +1,32 @@
+<header class="site-header" data-header>
+  <div class="wrap site-header__inner">
+    <a class="brand" href="/" aria-label="{{ site.title }} — home">
+      <img class="brand__logo" src="{{ site.logo }}" alt="{{ site.title }}" width="433" height="88" />
+    </a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="primary-nav"
+      data-nav-toggle
+    >
+      <span class="nav-toggle__bar" aria-hidden="true"></span>
+      <span class="visually-hidden">Menu</span>
+    </button>
+
+    <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+      <ul class="primary-nav__list">
+        {% for item in site.nav %}
+          <li>
+            <a
+              href="{{ item.url }}"
+              {% if page.url == item.url %}aria-current="page"{% endif %}
+              >{{ item.label }}</a
+            >
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+</header>

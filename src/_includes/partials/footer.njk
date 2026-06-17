@@ -1,0 +1,38 @@
+<footer class="site-footer">
+  <div class="wrap site-footer__grid">
+    <div class="site-footer__brand">
+      <p class="site-footer__name">{{ site.title }}</p>
+      <p class="site-footer__tagline">{{ site.tagline }}</p>
+      <ul class="site-footer__affil">
+        {% for a in site.affiliations %}
+          <li><a href="{{ a.url }}">{{ a.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="site-footer__contact">
+      <h2 class="site-footer__heading">Contact</h2>
+      <address>
+        {{ site.contact.address1 }}<br />
+        {{ site.contact.address2 }}<br />
+        {{ site.contact.city }}, {{ site.contact.state }} {{ site.contact.zip }}<br />
+        <a href="tel:+1{{ site.contact.phone | replace('-', '') }}">{{ site.contact.phone }}</a><br />
+        <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>
+      </address>
+    </div>
+
+    <nav class="site-footer__nav" aria-label="Footer">
+      <h2 class="site-footer__heading">Explore</h2>
+      <ul>
+        {% for item in site.nav %}
+          <li><a href="{{ item.url }}">{{ item.label }}</a></li>
+        {% endfor %}
+        <li><a href="/alumni/">Alumni</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="wrap site-footer__legal">
+    <p>&copy; {{ site.title }}, {{ site.institution }}.</p>
+  </div>
+</footer>

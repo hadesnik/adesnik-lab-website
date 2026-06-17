@@ -1,0 +1,33 @@
+{
+  "title": "Adesnik Lab",
+  "shortName": "Adesnik Lab",
+  "institution": "University of California, Berkeley",
+  "tagline": "Our laboratory aims to reveal the neural basis of perception.",
+  "description": "The Adesnik Lab at UC Berkeley studies how cortical microcircuits process sensory information to generate perception, using optical technologies to read and write neural activity with cellular resolution.",
+  "url": "https://adesnik.berkeley.edu",
+  "logo": "/assets/images/adesnik-lab-logo.png",
+  "nav": [
+    { "label": "Research", "url": "/research/" },
+    { "label": "Movies", "url": "/movies/" },
+    { "label": "Lab Members", "url": "/lab-members/" },
+    { "label": "Publications", "url": "/publications/" },
+    { "label": "Positions", "url": "/positions/" },
+    { "label": "Funding", "url": "/funding/" },
+    { "label": "Contact", "url": "/contact/" }
+  ],
+  "contact": {
+    "address1": "205 Weill Hall",
+    "address2": "University of California, Berkeley",
+    "city": "Berkeley",
+    "state": "CA",
+    "zip": "94720",
+    "phone": "510-642-2111",
+    "email": "hadesnik@berkeley.edu",
+    "applicationsEmail": "hadesnik@berkeley.edu"
+  },
+  "affiliations": [
+    { "name": "Department of Neuroscience", "url": "https://neuroscience.berkeley.edu" },
+    { "name": "Helen Wills Neuroscience Institute", "url": "https://neuroscience.berkeley.edu" }
+  ],
+  "social": []
+}

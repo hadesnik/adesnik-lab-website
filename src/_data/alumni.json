@@ -1,0 +1,30 @@
+{
+  "note": "Current positions are best-effort from the live site and should be verified by the lab.",
+  "people": [
+    { "name": "Ian Oldenburg", "current": "Assistant Professor, Rutgers University", "photo": "/assets/images/ian-oldenburg.jpg" },
+    { "name": "Nicolas Pégard", "current": "Associate Professor, University of North Carolina at Chapel Hill", "photo": null },
+    { "name": "Scott Pluta", "current": "Assistant Professor, Purdue University", "photo": null },
+    { "name": "Hyeyoung Shin", "current": "Assistant Professor, Seoul National University", "photo": null },
+    { "name": "Yi Xue", "current": "Associate Professor, UC Davis (Biomedical Engineering)", "photo": null },
+    { "name": "Kevin Zhou", "current": "Assistant Professor, University of Michigan", "photo": null },
+    { "name": "Julia Veit", "current": "Principal Investigator, University of Bremen", "photo": null },
+    { "name": "Alan Mardinly", "current": "Co-founder, Science Inc.", "photo": null },
+    { "name": "Evan Lyall", "current": "CTO and Co-founder, Rosebud Biosciences", "photo": null },
+    { "name": "Dan Mossing", "current": "Researcher, OpenAI", "photo": null },
+    { "name": "Jennifer Brown", "current": "Preclinical / Gene therapy / BCI", "photo": "/assets/images/jennifer-brown.jpg" },
+    { "name": "Alex Naka", "current": "Data Scientist, Science Inc.", "photo": null },
+    { "name": "Ben Shababo", "current": null, "photo": null },
+    { "name": "Elena Ryapolova-Webb", "current": "Senior Data Scientist, Qventus Inc.", "photo": null },
+    { "name": "Greg Telian", "current": "Postdoctoral Scholar in Psychiatry, UCSF", "photo": null },
+    { "name": "Yun Chiu", "current": "Graduate Fellow, Caltech", "photo": "/assets/images/yun-chiu.jpg" },
+    { "name": "Desiree Chu", "current": "PhD Student, UC San Diego", "photo": null },
+    { "name": "Richard Hakim", "current": "Research Fellow, Kempner Institute, Harvard University", "photo": null },
+    { "name": "Kiarash Shamardani", "current": "PhD Student, Stanford University", "photo": null },
+    { "name": "David Taylor", "current": "Research Scientist, Sonera", "photo": null },
+    { "name": "Nikhil Bhatla", "current": null, "photo": null },
+    { "name": "Lucy Yao", "current": "Physician (MD)", "photo": null },
+    { "name": "Hayley Bounds", "current": "Postdoctoral Fellow, Carandini and Harris Lab, UCL", "photo": "/assets/images/hayley-bounds.jpg" },
+    { "name": "Marta Gajowa", "current": null, "photo": "/assets/images/marta-gajowa.jpg" },
+    { "name": "Daniel Quintana", "current": "Medical Student, UCSF", "photo": "/assets/images/daniel-quintana.jpg" }
+  ]
+}

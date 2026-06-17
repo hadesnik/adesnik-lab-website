@@ -1,0 +1,22 @@
+---
+layout: layouts/page.njk
+permalink: /alumni/
+title: Alumni
+eyebrow: Where they are now
+intro: Former members of the Adesnik Lab now lead labs, build companies, and practice medicine around the world.
+---
+
+{% from "components/cards.njk" import alumnusCard %}
+
+<section class="section">
+  <div class="wrap">
+    <div class="alum-grid">
+      {% for person in alumni.people %}
+        {{ alumnusCard(person) }}
+      {% endfor %}
+    </div>
+    <p class="people-foot">
+      <a href="/lab-members/">← Current lab members</a>
+    </p>
+  </div>
+</section>

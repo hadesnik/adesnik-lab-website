@@ -1,0 +1,16 @@
+{
+  "name": "adesnik-lab-website",
+  "version": "1.0.0",
+  "description": "Static website for the Adesnik Lab, UC Berkeley — built with Eleventy.",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy",
+    "clean": "rm -rf _site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "puppeteer-core": "^25.1.0"
+  }
+}

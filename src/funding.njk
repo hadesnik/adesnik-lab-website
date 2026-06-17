@@ -1,0 +1,24 @@
+---
+layout: layouts/page.njk
+permalink: /funding/
+title: Funding
+eyebrow: Support
+intro: We gratefully acknowledge the agencies and foundations whose support makes our research possible.
+---
+
+<section class="section">
+  <div class="wrap">
+    <ul class="funders">
+      {% for f in funding.sources %}
+        <li class="funder">
+          {% set inner %}{% if f.logo %}<img class="funder__logo" src="{{ f.logo }}" alt="{{ f.name }}" loading="lazy" />{% else %}<span class="funder__name">{{ f.name }}</span>{% endif %}{% endset %}
+          {% if f.url %}
+            <a href="{{ f.url }}" class="funder__link" aria-label="{{ f.name }}">{{ inner | safe }}</a>
+          {% else %}
+            <span class="funder__link">{{ inner | safe }}</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,151 @@
+---
+layout: layouts/base.njk
+permalink: /
+---
+
+<section class="hero">
+  <svg
+    class="hero__motif"
+    viewBox="0 0 1200 700"
+    preserveAspectRatio="xMidYMid slice"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <g>
+      <line x1="120" y1="120" x2="300" y2="80" />
+      <line x1="300" y1="80" x2="480" y2="180" />
+      <line x1="120" y1="120" x2="260" y2="260" />
+      <line x1="260" y1="260" x2="440" y2="360" />
+      <line x1="480" y1="180" x2="440" y2="360" />
+      <line x1="260" y1="260" x2="120" y2="380" />
+      <line x1="480" y1="180" x2="620" y2="90" />
+      <line x1="620" y1="90" x2="760" y2="220" />
+      <line x1="760" y1="220" x2="640" y2="320" />
+      <line x1="440" y1="360" x2="640" y2="320" />
+      <line x1="760" y1="220" x2="900" y2="140" />
+      <line x1="900" y1="140" x2="1040" y2="250" />
+      <line x1="1040" y1="250" x2="880" y2="380" />
+      <line x1="880" y1="380" x2="640" y2="320" />
+      <line x1="1040" y1="250" x2="1080" y2="420" />
+      <line x1="640" y1="320" x2="700" y2="460" />
+      <line x1="440" y1="360" x2="520" y2="520" />
+      <line x1="520" y1="520" x2="300" y2="470" />
+      <line x1="300" y1="470" x2="120" y2="380" />
+      <line x1="300" y1="470" x2="160" y2="560" />
+      <line x1="880" y1="380" x2="980" y2="560" />
+      <line x1="700" y1="460" x2="760" y2="600" />
+      <line x1="520" y1="520" x2="700" y2="460" />
+      <line x1="900" y1="140" x2="1120" y2="120" />
+    </g>
+    <g>
+      <circle cx="120" cy="120" r="5" />
+      <circle class="node--gold pulse" cx="300" cy="80" r="7" />
+      <circle cx="480" cy="180" r="5" />
+      <circle cx="260" cy="260" r="4" />
+      <circle class="node--gold pulse" cx="440" cy="360" r="7" />
+      <circle cx="120" cy="380" r="5" />
+      <circle cx="620" cy="90" r="4" />
+      <circle class="node--gold" cx="760" cy="220" r="6" />
+      <circle cx="640" cy="320" r="5" />
+      <circle cx="900" cy="140" r="5" />
+      <circle class="node--gold pulse" cx="1040" cy="250" r="7" />
+      <circle cx="880" cy="380" r="5" />
+      <circle cx="1080" cy="420" r="4" />
+      <circle cx="700" cy="460" r="5" />
+      <circle class="node--gold" cx="520" cy="520" r="6" />
+      <circle cx="300" cy="470" r="5" />
+      <circle cx="160" cy="560" r="4" />
+      <circle cx="980" cy="560" r="5" />
+      <circle cx="760" cy="600" r="4" />
+      <circle class="node--gold pulse" cx="1120" cy="120" r="6" />
+    </g>
+  </svg>
+
+  <div class="wrap">
+    <div class="hero__inner">
+      <p class="hero__eyebrow">Adesnik Lab · UC Berkeley</p>
+      <h1>Our laboratory aims to reveal the neural basis of <em>perception</em>.</h1>
+      <p class="hero__sub">
+        We study how cortical microcircuits process sensory information — building
+        optical tools to read and write neural activity with cellular resolution
+        across the living brain.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--gold" href="/research/">Explore our research</a>
+        <a class="btn btn--ghost" href="/positions/">Join the lab</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>How does a collection of neurons give rise to perception?</h2>
+      <p class="lead">{{ research.intro }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Research</p>
+      <h2>Areas of focus</h2>
+    </div>
+    <div class="grid grid--3">
+      {% for theme in research.themes %}
+        <article class="card theme-card">
+          <div
+            class="theme-card__media"
+            {% if theme.image %}style="background-image:url('{{ theme.image }}')"{% endif %}
+          >
+            {% if not theme.image %}<span class="theme-card__num">0{{ loop.index }}</span>{% endif %}
+          </div>
+          <div class="theme-card__body">
+            <h3>{{ theme.title }}</h3>
+            <p>{{ theme.summary }}</p>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+    <div class="btn-row">
+      <a class="btn btn--gold" href="/research/">More about our research</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--navy">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Publications</p>
+      <h2>Recent work</h2>
+    </div>
+    <ul class="pub-list">
+      {% for pub in publications.published | limit(4) %}
+        <li class="pub">
+          <span class="pub__year">{{ pub.year }}</span>
+          <div>
+            <p class="pub__title">
+              {% set link = pub | pubLink %}
+              {% if link %}<a href="{{ link }}">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}
+            </p>
+            <p class="pub__meta">
+              {{ pub.authors }} · <span class="pub__journal">{{ pub.journal }}</span>{% if pub.year %}, {{ pub.year }}{% endif %}
+            </p>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+    <div class="btn-row">
+      <a class="btn btn--gold" href="/publications/">All publications</a>
+    </div>
+  </div>
+</section>
+
+<section class="section cta">
+  <div class="wrap">
+    <h2>Interested in joining the lab?</h2>
+    <a class="btn" href="/positions/">See open positions</a>
+  </div>
+</section>

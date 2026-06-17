@@ -1,0 +1,10 @@
+node_modules/
+_site/
+.DS_Store
+*.log
+npm-debug.log*
+
+# Large source originals (web-sized copies live in src/assets/)
+old website images/
+movies/
+previews/

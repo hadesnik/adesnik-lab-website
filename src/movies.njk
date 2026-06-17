@@ -1,0 +1,37 @@
+---
+layout: layouts/page.njk
+permalink: /movies/
+title: Movies
+eyebrow: In motion
+intro: A few movies from our microscopes — neural activity and imaging from the lab.
+---
+
+<section class="section">
+  <div class="wrap">
+    <div class="movie-grid">
+      {% for m in movies.items %}
+        <figure class="movie">
+          <div class="movie__frame">
+            <video
+              class="movie__video"
+              {% if m.poster %}poster="{{ m.poster }}"{% endif %}
+              muted
+              loop
+              playsinline
+              controls
+              preload="metadata"
+              {% if m.autoplay %}data-autoplay{% endif %}
+            >
+              <source src="{{ m.src }}" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <figcaption class="movie__cap">
+            <h2 class="movie__title">{{ m.title }}</h2>
+            {% if m.caption %}<p class="movie__desc">{{ m.caption }}</p>{% endif %}
+          </figcaption>
+        </figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>

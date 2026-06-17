@@ -1,0 +1,44 @@
+---
+layout: layouts/page.njk
+permalink: /research/
+title: Research
+intro: We study how cortical microcircuits process sensory information to generate perception.
+heroImage: /assets/images/research-banner.jpg
+---
+
+<section class="section">
+  <div class="wrap">
+    <p class="lead measure">{{ research.intro }}</p>
+  </div>
+</section>
+
+<section class="section section--paper">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Areas of focus</h2>
+    </div>
+    <div class="features">
+      {% for theme in research.themes %}
+        <article class="feature {% if loop.index is even %}feature--reverse{% endif %}">
+          <div
+            class="feature__media"
+            {% if theme.image %}style="background-image:url('{{ theme.image }}')"{% endif %}
+          >
+            {% if not theme.image %}<span class="feature__num">0{{ loop.index }}</span>{% endif %}
+          </div>
+          <div class="feature__body">
+            <h3>{{ theme.title }}</h3>
+            <p>{{ theme.summary }}</p>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section cta">
+  <div class="wrap">
+    <h2>Want to do this kind of science?</h2>
+    <a class="btn" href="/positions/">Open positions</a>
+  </div>
+</section>

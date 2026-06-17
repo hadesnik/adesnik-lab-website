@@ -1,0 +1,63 @@
+---
+layout: layouts/page.njk
+permalink: /publications/
+title: Publications
+eyebrow: Peer-reviewed papers & preprints
+intro: Select and recent publications from the Adesnik Lab. Each entry links to the journal or PubMed record.
+---
+
+{% from "components/cards.njk" import pubItem %}
+
+<section class="section">
+  <div class="wrap measure-wide">
+    <div class="pub-filter">
+      <label for="pub-search" class="visually-hidden">Filter publications</label>
+      <input
+        type="search"
+        id="pub-search"
+        class="pub-filter__input"
+        placeholder="Filter by title, author, journal, or year…"
+        data-pub-filter
+        autocomplete="off"
+      />
+      <p class="pub-filter__count" data-pub-count aria-live="polite"></p>
+    </div>
+
+    {# Rolling buckets relative to the build year: recent papers (last 4 years),
+       preprints (last 3 years), and all earlier published papers. #}
+    {% set recentCutoff = buildYear - 4 %}
+    {% set preprintCutoff = buildYear - 3 %}
+    {% set recentPapers = publications.published | sinceYear(recentCutoff) %}
+    {% set earlierPapers = publications.published | beforeYear(recentCutoff) %}
+    {% set recentPreprints = publications.preprints | sinceYear(preprintCutoff) %}
+
+    {% if recentPapers.length %}
+      <div class="pub-section" data-pub-section>
+        <h2 class="pub-section__title">Recent papers</h2>
+        <ul class="pub-list">
+          {% for pub in recentPapers %}{{ pubItem(pub) }}{% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    {% if recentPreprints.length %}
+      <div class="pub-section" data-pub-section>
+        <h2 class="pub-section__title">Preprints</h2>
+        <ul class="pub-list">
+          {% for pub in recentPreprints %}{{ pubItem(pub) }}{% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    {% if earlierPapers.length %}
+      <div class="pub-section" data-pub-section>
+        <h2 class="pub-section__title">Papers</h2>
+        <ul class="pub-list">
+          {% for pub in earlierPapers %}{{ pubItem(pub) }}{% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <p class="pub-empty" data-pub-empty hidden>No publications match your search.</p>
+  </div>
+</section>

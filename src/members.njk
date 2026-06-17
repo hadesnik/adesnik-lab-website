@@ -1,0 +1,29 @@
+---
+layout: layouts/page.njk
+permalink: /lab-members/
+title: Lab Members
+eyebrow: The team
+intro: A group of scientists building tools and asking how the brain gives rise to perception.
+---
+
+{% from "components/cards.njk" import memberCard %}
+
+<section class="section">
+  <div class="wrap">
+    {% for group in members.groups %}
+      <div class="people-group">
+        <h2 class="people-group__title">{{ group.title }}</h2>
+        <div class="people-grid {% if group.id == 'pi' %}people-grid--lead{% endif %}">
+          {% for person in group.people %}
+            {{ memberCard(person) }}
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+
+    <p class="people-foot">
+      Many former members have gone on to faculty positions, industry, and beyond.
+      <a href="/alumni/">Meet our alumni →</a>
+    </p>
+  </div>
+</section>

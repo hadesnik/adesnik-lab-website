@@ -1,0 +1,42 @@
+---
+layout: layouts/page.njk
+permalink: /contact/
+title: Contact
+intro: Find us at Weill Hall on the UC Berkeley campus.
+---
+
+<section class="section">
+  <div class="wrap contact-grid">
+    <div class="contact-block">
+      <h2>Adesnik Lab</h2>
+      <address class="contact-address">
+        {{ site.contact.address1 }}<br />
+        {{ site.contact.address2 }}<br />
+        {{ site.contact.city }}, {{ site.contact.state }} {{ site.contact.zip }}
+      </address>
+
+      <dl class="contact-dl">
+        <dt>Phone</dt>
+        <dd><a href="tel:+1{{ site.contact.phone | replace('-', '') }}">{{ site.contact.phone }}</a></dd>
+        <dt>Email</dt>
+        <dd><a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a></dd>
+      </dl>
+
+      <h3 class="contact-subhead">Affiliations</h3>
+      <ul class="contact-affil">
+        {% for a in site.affiliations %}
+          <li><a href="{{ a.url }}">{{ a.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <a
+      class="contact-map"
+      href="https://www.google.com/maps/search/?api=1&query=Weill+Hall+UC+Berkeley"
+      aria-label="Open Weill Hall, UC Berkeley in Google Maps"
+    >
+      <span class="contact-map__pin" aria-hidden="true"></span>
+      <span class="contact-map__label">205 Weill Hall · UC Berkeley<br /><small>Open in Google Maps →</small></span>
+    </a>
+  </div>
+</section>
