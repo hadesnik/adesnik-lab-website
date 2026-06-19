@@ -26,7 +26,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      - run: touch _site/.nojekyll
+      - run: |
+          touch _site/.nojekyll
+          echo "adesnik.berkeley.edu" > _site/CNAME
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
