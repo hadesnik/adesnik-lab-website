@@ -2,10 +2,16 @@
 layout: layouts/base.njk
 ---
 
-<section
-  class="page-hero {% if heroImage %}page-hero--image{% endif %}"
-  {% if heroImage %}style="background-image:url('{{ heroImage }}')"{% endif %}
->
+<section class="page-hero {% if heroImage %}page-hero--image{% endif %}">
+  {% if heroImage %}
+    <div
+      class="page-hero__bg"
+      data-parallax
+      data-parallax-speed="0.45"
+      style="background-image:url('{{ heroImage }}')"
+      aria-hidden="true"
+    ></div>
+  {% endif %}
   <div class="wrap">
     {% if eyebrow %}<p class="eyebrow">{{ eyebrow }}</p>{% endif %}
     <h1>{{ title }}</h1>

@@ -5,7 +5,9 @@ module.exports = function (eleventyConfig) {
   // Take the first n items of an array (e.g. recent publications on the home page).
   eleventyConfig.addFilter("limit", (arr, n) => (arr || []).slice(0, n));
 
-  // Build a canonical link for a publication from DOI / PMID when present.
+  // Build a canonical link for a publication: the journal / DOI landing page
+  // for the paper (falling back to PMID or an explicit url). The direct PDF,
+  // when available, is offered separately as its own link (see pub.pdf).
   eleventyConfig.addFilter("pubLink", (pub) => {
     if (!pub) return null;
     if (pub.doi) return `https://doi.org/${pub.doi}`;

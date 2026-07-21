@@ -17,7 +17,6 @@
       "id": "postdocs",
       "title": "Postdoctoral Fellows",
       "people": [
-        { "name": "Lamiae Abdeladim", "role": "Postdoctoral Fellow", "photo": "/assets/images/lamiae-abdeladim.jpg", "bio": null, "links": {} },
         { "name": "Conor Dorian", "role": "Postdoctoral Fellow", "photo": "/assets/images/conor-dorian.jpg", "bio": null, "links": {} },
         { "name": "Uday Jagadisan", "role": "Postdoctoral Fellow", "photo": "/assets/images/uday-jagadisan.jpg", "bio": null, "links": {} },
         { "name": "Mora Ogando", "role": "Postdoctoral Fellow", "photo": "/assets/images/mora-ogando.jpg", "bio": null, "links": {} },
@@ -38,11 +37,12 @@
       ]
     },
     {
-      "id": "staff",
-      "title": "Research Staff",
+      "id": "undergraduates",
+      "title": "Undergraduates",
       "people": [
-        { "name": "Janine Beyer", "role": "Research Associate", "photo": "/assets/images/janine-beyer.jpg", "bio": null, "links": {} },
-        { "name": "Karthika Gopakumar", "role": "Research Associate", "photo": "/assets/images/karthika-gopakumar.jpg", "bio": null, "links": {} }
+        { "name": "Sarah Alwakeel", "role": "Undergraduate Researcher", "photo": null, "bio": null, "links": {} },
+        { "name": "Jade Bartley-Noza", "role": "Undergraduate Researcher", "photo": null, "bio": null, "links": {} },
+        { "name": "Lucas Chi", "role": "Undergraduate Researcher", "photo": null, "bio": null, "links": {} }
       ]
     }
   ]

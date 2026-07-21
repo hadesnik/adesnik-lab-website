@@ -11,7 +11,7 @@
 {%- endmacro -%}
 
 {%- macro memberCard(person) -%}
-<article class="person">
+<article class="person" data-reveal>
   <div class="person__media">
     {% if person.photo %}
       <img src="{{ person.photo }}" alt="Portrait of {{ person.name }}" loading="lazy" width="400" height="400" />
@@ -35,12 +35,14 @@
 {%- endmacro -%}
 
 {%- macro alumnusCard(person) -%}
-<article class="alum">
+<article class="alum" data-reveal>
   <span class="alum__avatar" aria-hidden="true">
     {% if person.photo %}<img src="{{ person.photo }}" alt="" loading="lazy" />{% else %}{{ initials(person.name) }}{% endif %}
   </span>
   <div>
-    <h3 class="alum__name">{{ person.name }}</h3>
+    <h3 class="alum__name">
+      {% if person.url %}<a href="{{ person.url }}">{{ person.name }}</a>{% else %}{{ person.name }}{% endif %}
+    </h3>
     {% if person.current %}<p class="alum__current">{{ person.current }}</p>{% endif %}
   </div>
 </article>
@@ -55,10 +57,11 @@
       {% if link %}<a href="{{ link }}">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}
     </p>
     <p class="pub__meta">{{ pub.authors }} · <span class="pub__journal">{{ pub.journal }}</span>{% if pub.volume %} {{ pub.volume }}{% endif %}</p>
-    {% if pub.doi or pub.pmid %}
+    {% if pub.doi or pub.pmid or pub.pdf %}
       <p class="pub__links">
         {% if pub.doi %}<a href="https://doi.org/{{ pub.doi }}">DOI</a>{% endif %}
         {% if pub.pmid %}<a href="https://pubmed.ncbi.nlm.nih.gov/{{ pub.pmid }}/">PubMed</a>{% endif %}
+        {% if pub.pdf %}<a href="{{ pub.pdf }}" target="_blank" rel="noopener">PDF</a>{% endif %}
       </p>
     {% endif %}
   </div>

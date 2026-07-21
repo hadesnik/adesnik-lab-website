@@ -4,8 +4,11 @@ permalink: /
 ---
 
 <section class="hero">
+  <div class="hero__bg" data-parallax data-parallax-speed="0.35" aria-hidden="true"></div>
   <svg
     class="hero__motif"
+    data-parallax
+    data-parallax-speed="0.12"
     viewBox="0 0 1200 700"
     preserveAspectRatio="xMidYMid slice"
     aria-hidden="true"
@@ -80,7 +83,7 @@ permalink: /
 
 <section class="section">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head" data-reveal>
       <h2>How does a collection of neurons give rise to perception?</h2>
       <p class="lead">{{ research.intro }}</p>
     </div>
@@ -89,13 +92,13 @@ permalink: /
 
 <section class="section section--paper">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head" data-reveal>
       <p class="eyebrow">Research</p>
       <h2>Areas of focus</h2>
     </div>
     <div class="grid grid--3">
       {% for theme in research.themes %}
-        <article class="card theme-card">
+        <article class="card theme-card" data-reveal>
           <div
             class="theme-card__media"
             {% if theme.image %}style="background-image:url('{{ theme.image }}')"{% endif %}
@@ -117,7 +120,7 @@ permalink: /
 
 <section class="section section--navy">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head" data-reveal>
       <p class="eyebrow">Publications</p>
       <h2>Recent work</h2>
     </div>
@@ -144,7 +147,7 @@ permalink: /
 </section>
 
 <section class="section cta">
-  <div class="wrap">
+  <div class="wrap" data-reveal>
     <h2>Interested in joining the lab?</h2>
     <a class="btn" href="/positions/">See open positions</a>
   </div>

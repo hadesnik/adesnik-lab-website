@@ -11,6 +11,10 @@
     <meta property="og:type" content="website" />
     <meta name="theme-color" content="#002a4e" />
 
+    {# Flag JS availability before first paint so reveal-on-scroll styles
+       only ever hide content when the script that reveals it will run. #}
+    <script>document.documentElement.className += " js";</script>
+
     <link rel="icon" href="{{ site.logo }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

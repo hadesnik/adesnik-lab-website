@@ -29,7 +29,8 @@ intro: Select and recent publications from the Adesnik Lab. Each entry links to 
     {% set recentCutoff = buildYear - 4 %}
     {% set preprintCutoff = buildYear - 3 %}
     {% set recentPapers = publications.published | sinceYear(recentCutoff) %}
-    {% set earlierPapers = publications.published | beforeYear(recentCutoff) %}
+    {% set earlierPapers = publications.published | beforeYear(recentCutoff) | sinceYear(2013) %}
+    {% set preAdesnikPapers = publications.published | beforeYear(2013) %}
     {% set recentPreprints = publications.preprints | sinceYear(preprintCutoff) %}
 
     {% if recentPapers.length %}
@@ -55,6 +56,15 @@ intro: Select and recent publications from the Adesnik Lab. Each entry links to 
         <h2 class="pub-section__title">Papers</h2>
         <ul class="pub-list">
           {% for pub in earlierPapers %}{{ pubItem(pub) }}{% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    {% if preAdesnikPapers.length %}
+      <div class="pub-section" data-pub-section>
+        <h2 class="pub-section__title">Papers from before the Adesnik lab</h2>
+        <ul class="pub-list">
+          {% for pub in preAdesnikPapers %}{{ pubItem(pub) }}{% endfor %}
         </ul>
       </div>
     {% endif %}

@@ -19,7 +19,7 @@ heroImage: /assets/images/research-banner.jpg
     </div>
     <div class="features">
       {% for theme in research.themes %}
-        <article class="feature {% if loop.index is even %}feature--reverse{% endif %}">
+        <article class="feature {% if loop.index is even %}feature--reverse{% endif %}" data-reveal>
           <div
             class="feature__media"
             {% if theme.image %}style="background-image:url('{{ theme.image }}')"{% endif %}
