@@ -4,21 +4,21 @@
     {
       "src": "/assets/videos/two-photon-imaging.mp4",
       "poster": "/assets/videos/two-photon-imaging.jpg",
-      "title": "Two-photon imaging",
+      "title": "Large scale two-photon calcium imaging (PacOp Avocado objective)",
       "caption": "",
       "autoplay": true
     },
     {
       "src": "/assets/videos/elevation-map-5x.mp4",
       "poster": "/assets/videos/elevation-map-5x.jpg",
-      "title": "Cortical elevation map (5× speed)",
+      "title": "Cortical elevation map in V1 measured through somatostatin interneurons",
       "caption": "",
       "autoplay": true
     },
     {
       "src": "/assets/videos/asap-voltage-imaging.mp4",
       "poster": "/assets/videos/asap-voltage-imaging.jpg",
-      "title": "Voltage imaging",
+      "title": "Voltage imaging of visual responses with ASAP7y",
       "caption": "",
       "autoplay": true
     },

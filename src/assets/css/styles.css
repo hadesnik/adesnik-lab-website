@@ -1,7 +1,7 @@
 /* =========================================================================
    Adesnik Lab — design system
    Palette: deep Berkeley navy ground + warm gold accent (from the lab logo),
-   serif display (Fraunces) over a clean sans body (Inter).
+   a single clean sans typeface (Inter) throughout.
    ========================================================================= */
 
 :root {
@@ -19,7 +19,7 @@
   --line-light: rgba(255, 255, 255, 0.16);
 
   /* Type */
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-display: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   /* Rhythm */
@@ -43,6 +43,12 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+}
+/* The hidden attribute must win over component display rules (e.g. .pub is a
+   grid), otherwise JS-set [hidden] elements like filtered-out publications
+   stay visible. */
+[hidden] {
+  display: none !important;
 }
 body {
   margin: 0;
@@ -70,9 +76,9 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.08;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   color: var(--navy-900);
   margin: 0 0 0.5em;
 }
@@ -1155,6 +1161,9 @@ a.funder__link:hover {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: clamp(1.25rem, 3vw, 2rem);
+  /* Let each card size to its own content instead of stretching to match the
+     taller card in its row — avoids empty space below shorter captions. */
+  align-items: start;
 }
 .movie {
   margin: 0;
