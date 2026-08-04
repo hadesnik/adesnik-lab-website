@@ -377,6 +377,19 @@
     if (depth < MAXDEPTH) for (const j of c.childEdges) if (rngE() < P_TX) { edges[j].pulseT0 = t; scheduled.push({ cell: edges[j].dst, time: t + T_W, depth: depth + 1 }); }
   }
 
+  // Occasional field-wide waves of activity: from a random seed point an
+  // expanding front sweeps the whole field, firing each cell as it passes.
+  // Speed is set so the front reaches the farthest cell in WAVE_TRAVERSE seconds.
+  const WAVE_MIN = 5, WAVE_MAX = 12, WAVE_TRAVERSE = 2;
+  const fieldWaves = [];
+  let nextWave = 4; // first wave a few seconds in
+  function launchWave(now) {
+    const sx = rngE() * 1200, sy = rngE() * 700, n = cells.length;
+    const dist = new Float64Array(n); let maxD = 1;
+    for (let i = 0; i < n; i++) { const dx = cells[i].hx - sx, dy = cells[i].hy - sy, d = Math.sqrt(dx * dx + dy * dy); dist[i] = d; if (d > maxD) maxD = d; }
+    fieldWaves.push({ t0: now, speed: maxD / WAVE_TRAVERSE, maxD, dist, fired: new Uint8Array(n) });
+  }
+
   // Advance sim-time only while running so an offscreen pause never causes a
   // "catch-up" burst of firing when the hero scrolls back into view.
   let simTime = 0, lastReal = null, rafId = null, hoveredId = null, lastHoverFire = -9;
@@ -388,6 +401,12 @@
     if (hoveredId != null && now - lastHoverFire > HOVER_INTERVAL) { fire(hoveredId, now, 0, true); lastHoverFire = now; }
     for (let i = 0; i < cells.length; i++) if (now >= cells[i].nextSpont) { fire(i, cells[i].nextSpont, 0); cells[i].nextSpont = now + ISI_MIN + rngE() * (ISI_MAX - ISI_MIN); }
     for (let k = scheduled.length - 1; k >= 0; k--) if (now >= scheduled[k].time) { const s = scheduled[k]; scheduled.splice(k, 1); fire(s.cell, s.time, s.depth); }
+    if (now >= nextWave) { launchWave(now); nextWave = now + WAVE_MIN + rngE() * (WAVE_MAX - WAVE_MIN); }
+    for (let w = fieldWaves.length - 1; w >= 0; w--) {
+      const wv = fieldWaves[w], frontR = wv.speed * (now - wv.t0);
+      for (let i = 0; i < cells.length; i++) if (!wv.fired[i] && wv.dist[i] <= frontR) { wv.fired[i] = 1; fire(i, now, MAXDEPTH, true); }
+      if (frontR > wv.maxD) fieldWaves.splice(w, 1);
+    }
     for (let i = 0; i < cells.length; i++) {
       const c = cells[i];
       for (let e = c.events.length - 1; e >= 0; e--) if (now - c.events[e].t0 > 2.3) c.events.splice(e, 1);
