@@ -320,7 +320,7 @@
   const focalStr = [], focal = [];
   sample(rng, 75, 28, true, 0).forEach(function (p) {
     const kind = rng() < 0.55 ? "p" : "i", s = 0.8 + rng() * 0.5;
-    focal.push(addNeuron(p[0], p[1], s, kind, kind === "p" ? -90 + (rng() - 0.5) * 30 : 0, L_FOCAL, focalStr));
+    focal.push(addNeuron(p[0], p[1], s, kind, kind === "p" ? -90 + (rng() - 0.5) * 12 : 0, L_FOCAL, focalStr));
   });
   const F = focal.length;
   let mx = 0, my = 0; focal.forEach((f) => { mx += f.nu.cx; my += f.nu.cy; }); mx /= F; my /= F;
@@ -338,7 +338,7 @@
     cells[focal[par[b]].id].childEdges.push(j);
   }
 
-  const dof1Str = []; sample(rng, 42, 0, false, 0).forEach(function (p) { const kind = rng() < 0.55 ? "p" : "i"; addNeuron(p[0], p[1], 0.9 + rng() * 0.5, kind, kind === "p" ? -90 + (rng() - 0.5) * 30 : 0, L_DOF1, dof1Str); });
+  const dof1Str = []; sample(rng, 42, 0, false, 0).forEach(function (p) { const kind = rng() < 0.55 ? "p" : "i"; addNeuron(p[0], p[1], 0.9 + rng() * 0.5, kind, kind === "p" ? -90 + (rng() - 0.5) * 12 : 0, L_DOF1, dof1Str); });
   const dof2Str = []; sample(rng, 60, 0, false, 0).forEach(function (p) { addNeuron(p[0], p[1], 1.0 + rng() * 0.8, "blob", 0, L_DOF2, dof2Str); });
 
   // Native SVG blur for the defocused volume layers. CSS filter:blur() on SVG
