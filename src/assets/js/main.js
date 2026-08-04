@@ -313,7 +313,7 @@
     if (kind === "blob") nu = { cx: x, cy: y, s, ang: 0, dend: "", tips: [], axonDir: 0 };
     else nu = kind === "p" ? pyramidal(rng, x, y, s, (adeg * Math.PI) / 180, id) : interneuron(rng, x, y, s, id);
     bucket.push(nu.dend + somaMarkup(nu, id, kind));
-    cells[id] = { soma: null, dend: [], events: [], nextSpont: 0, dendWasActive: false, childEdges: [], base: layer.base, gain: layer.gain, dbase: layer.dbase, dgain: layer.dgain, dim: layer.dim, bright: layer.bright, hasDend: kind !== "blob" };
+    cells[id] = { soma: null, dend: [], events: [], nextSpont: 0, dendWasActive: false, childEdges: [], base: layer.base, gain: layer.gain, dbase: layer.dbase, dgain: layer.dgain, dim: layer.dim, bright: layer.bright, hasDend: kind !== "blob", hx: x, hy: y, hr: Math.max(12, 10 * s) };
     return { id, nu };
   }
 
@@ -350,10 +350,11 @@
     waves += '<path class="spark spark--halo" data-ax="' + j + '" pathLength="100" d="' + e.trunkD + '" style="stroke-width:3.6;stroke-dasharray:5 400"/>';
     waves += '<path class="spark" data-ax="' + j + '" pathLength="100" d="' + e.trunkD + '" style="stroke-width:1.5;stroke-dasharray:2.5 400"/>';
   });
+  // A hit target over every cell (all layers), so aiming at any neuron — sharp
+  // or in the defocused volume, left or right — fires it.
   let hits = "";
-  focal.forEach(function (f) {
-    const r = Math.max(14, 12 * f.nu.s);
-    hits += '<circle class="hit" data-cell="' + f.id + '" cx="' + R(f.nu.cx) + '" cy="' + R(f.nu.cy) + '" r="' + r.toFixed(1) + '" fill="transparent"/>';
+  cells.forEach(function (c, id) {
+    hits += '<circle class="hit" data-cell="' + id + '" cx="' + R(c.hx) + '" cy="' + R(c.hy) + '" r="' + c.hr.toFixed(1) + '" fill="transparent"/>';
   });
   inner += "<g>" + waves + "</g><g>" + hits + "</g></g>";
   svg.innerHTML = inner;
@@ -416,6 +417,9 @@
   } else {
     start();
   }
+  // Returning to a backgrounded tab: reset the frame clock so sim-time resumes
+  // smoothly instead of jumping by the whole time the tab was hidden.
+  document.addEventListener("visibilitychange", function () { if (!document.hidden) lastReal = null; });
 
   // Hover-to-fire: while the pointer rests on a cell body it fires continuously
   // (a sustained spike train, every HOVER_INTERVAL, each propagating to its
