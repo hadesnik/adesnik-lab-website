@@ -380,11 +380,12 @@
   // Occasional field-wide waves of activity: from a random seed point an
   // expanding front sweeps the whole field, firing each cell as it passes.
   // Speed is set so the front reaches the farthest cell in WAVE_TRAVERSE seconds.
-  const WAVE_MIN = 5, WAVE_MAX = 12, WAVE_TRAVERSE = 2;
+  const WAVE_MIN = 2, WAVE_MAX = 4.8, WAVE_TRAVERSE = 2;
   const fieldWaves = [];
   let nextWave = 4; // first wave a few seconds in
-  function launchWave(now) {
-    const sx = rngE() * 1200, sy = rngE() * 700, n = cells.length;
+  function launchWave(now, sx, sy) {
+    if (sx === undefined) { sx = rngE() * 1200; sy = rngE() * 700; }
+    const n = cells.length;
     const dist = new Float64Array(n); let maxD = 1;
     for (let i = 0; i < n; i++) { const dx = cells[i].hx - sx, dy = cells[i].hy - sy, d = Math.sqrt(dx * dx + dy * dy); dist[i] = d; if (d > maxD) maxD = d; }
     fieldWaves.push({ t0: now, speed: maxD / WAVE_TRAVERSE, maxD, dist, fired: new Uint8Array(n) });
@@ -392,13 +393,18 @@
 
   // Advance sim-time only while running so an offscreen pause never causes a
   // "catch-up" burst of firing when the hero scrolls back into view.
-  let simTime = 0, lastReal = null, rafId = null, hoveredId = null, lastHoverFire = -9;
+  let simTime = 0, lastReal = null, rafId = null, hoveredId = null, lastHoverFire = -9, lastHovered = null, hoverStart = 0;
   function frame() {
     const real = performance.now() / 1000;
     if (lastReal == null) lastReal = real;
     simTime += real - lastReal; lastReal = real;
     const now = simTime;
-    if (hoveredId != null && now - lastHoverFire > HOVER_INTERVAL) { fire(hoveredId, now, 0, true); lastHoverFire = now; }
+    if (hoveredId !== lastHovered) { lastHovered = hoveredId; hoverStart = now; }
+    if (hoveredId != null) {
+      if (now - lastHoverFire > HOVER_INTERVAL) { fire(hoveredId, now, 0, true); lastHoverFire = now; }
+      // Held on one neuron > 2s → seed a field wave from it; 5s refractory per neuron.
+      if (now - hoverStart > 2 && now >= (cells[hoveredId].wRefr || 0)) { launchWave(now, cells[hoveredId].hx, cells[hoveredId].hy); cells[hoveredId].wRefr = now + 5; }
+    }
     for (let i = 0; i < cells.length; i++) if (now >= cells[i].nextSpont) { fire(i, cells[i].nextSpont, 0); cells[i].nextSpont = now + ISI_MIN + rngE() * (ISI_MAX - ISI_MIN); }
     for (let k = scheduled.length - 1; k >= 0; k--) if (now >= scheduled[k].time) { const s = scheduled[k]; scheduled.splice(k, 1); fire(s.cell, s.time, s.depth); }
     if (now >= nextWave) { launchWave(now); nextWave = now + WAVE_MIN + rngE() * (WAVE_MAX - WAVE_MIN); }
