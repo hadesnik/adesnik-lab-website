@@ -222,6 +222,7 @@
   // ---- tunables ----
   const T_W = 0.35, P_DEND = 0.85, P_TX = 0.42, MAXDEPTH = 3;
   const ISI_MIN = 9, ISI_MAX = 20, BAP_V = 1040, D_MAX = 0.85;
+  const HOVER_INTERVAL = 0.12; // while a cell is hovered, keep firing it this often
   const L_FOCAL = { base: 0.16, gain: 1.0, dbase: 0.1, dgain: 1.0, dim: [122, 105, 68], bright: [255, 236, 182] };
   const L_DOF1 = { base: 0.14, gain: 0.7, dbase: 0.09, dgain: 0.7, dim: [96, 82, 54], bright: [200, 175, 128] };
   const L_DOF2 = { base: 0.12, gain: 0.55, dbase: 0, dgain: 0, dim: [82, 70, 46], bright: [165, 142, 104] };
@@ -317,7 +318,7 @@
   }
 
   const focalStr = [], focal = [];
-  sample(rng, 50, 34, true, 0).forEach(function (p) {
+  sample(rng, 75, 28, true, 0).forEach(function (p) {
     const kind = rng() < 0.55 ? "p" : "i", s = 0.8 + rng() * 0.5;
     focal.push(addNeuron(p[0], p[1], s, kind, kind === "p" ? -90 + (rng() - 0.5) * 30 : 0, L_FOCAL, focalStr));
   });
@@ -337,8 +338,8 @@
     cells[focal[par[b]].id].childEdges.push(j);
   }
 
-  const dof1Str = []; sample(rng, 28, 0, false, 0).forEach(function (p) { const kind = rng() < 0.55 ? "p" : "i"; addNeuron(p[0], p[1], 0.9 + rng() * 0.5, kind, kind === "p" ? -90 + (rng() - 0.5) * 30 : 0, L_DOF1, dof1Str); });
-  const dof2Str = []; sample(rng, 40, 0, false, 0).forEach(function (p) { addNeuron(p[0], p[1], 1.0 + rng() * 0.8, "blob", 0, L_DOF2, dof2Str); });
+  const dof1Str = []; sample(rng, 42, 0, false, 0).forEach(function (p) { const kind = rng() < 0.55 ? "p" : "i"; addNeuron(p[0], p[1], 0.9 + rng() * 0.5, kind, kind === "p" ? -90 + (rng() - 0.5) * 30 : 0, L_DOF1, dof1Str); });
+  const dof2Str = []; sample(rng, 60, 0, false, 0).forEach(function (p) { addNeuron(p[0], p[1], 1.0 + rng() * 0.8, "blob", 0, L_DOF2, dof2Str); });
 
   let inner = '<g opacity="0.6">';
   inner += '<g class="dof2" opacity=".8">' + dof2Str.join("") + "</g>";
@@ -378,12 +379,13 @@
 
   // Advance sim-time only while running so an offscreen pause never causes a
   // "catch-up" burst of firing when the hero scrolls back into view.
-  let simTime = 0, lastReal = null, rafId = null;
+  let simTime = 0, lastReal = null, rafId = null, hoveredId = null, lastHoverFire = -9;
   function frame() {
     const real = performance.now() / 1000;
     if (lastReal == null) lastReal = real;
     simTime += real - lastReal; lastReal = real;
     const now = simTime;
+    if (hoveredId != null && now - lastHoverFire > HOVER_INTERVAL) { fire(hoveredId, now, 0, true); lastHoverFire = now; }
     for (let i = 0; i < cells.length; i++) if (now >= cells[i].nextSpont) { fire(i, cells[i].nextSpont, 0); cells[i].nextSpont = now + ISI_MIN + rngE() * (ISI_MAX - ISI_MIN); }
     for (let k = scheduled.length - 1; k >= 0; k--) if (now >= scheduled[k].time) { const s = scheduled[k]; scheduled.splice(k, 1); fire(s.cell, s.time, s.depth); }
     for (let i = 0; i < cells.length; i++) {
@@ -415,16 +417,25 @@
     start();
   }
 
-  // Hover-to-fire: mousing over (or tapping) a cell body flashes it and lets the
-  // spike propagate to its targets. Guarded so a slow pointer sweeping across
-  // overlapping cells doesn't retrigger the same cell many times per second.
+  // Hover-to-fire: while the pointer rests on a cell body it fires continuously
+  // (a sustained spike train, every HOVER_INTERVAL, each propagating to its
+  // targets). The whole hero banner shows a gold bullseye reticle cursor (a
+  // small inline-SVG cursor) to evoke "targeting" the neurons.
+  const reticle =
+    '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">' +
+    '<g fill="none" stroke="#000" stroke-opacity=".55" stroke-width="3">' +
+    '<circle cx="16" cy="16" r="10.5"/><circle cx="16" cy="16" r="4.5"/>' +
+    '<path d="M16 1.5V7M16 25v5.5M1.5 16H7M25 16h5.5"/></g>' +
+    '<g fill="none" stroke="#e0a93b" stroke-width="1.6">' +
+    '<circle cx="16" cy="16" r="10.5"/><circle cx="16" cy="16" r="4.5"/>' +
+    '<path d="M16 1.5V7M16 25v5.5M1.5 16H7M25 16h5.5"/></g>' +
+    '<circle cx="16" cy="16" r="1.4" fill="#e0a93b"/></svg>';
+  const cursor = 'url("data:image/svg+xml,' + encodeURIComponent(reticle) + '") 16 16, crosshair';
+  // Reticle over the whole hero banner (buttons restore the pointer via CSS).
+  if (svg.parentElement) svg.parentElement.style.cursor = cursor;
   svg.querySelectorAll(".hit").forEach(function (el) {
     const id = +el.dataset.cell;
-    el.addEventListener("pointerenter", function () {
-      const evs = cells[id].events;
-      const last = evs.length ? evs[evs.length - 1].t0 : -9;
-      if (simTime - last < 0.2) return;
-      fire(id, simTime, 0, true);
-    });
+    el.addEventListener("pointerenter", function () { hoveredId = id; });
+    el.addEventListener("pointerleave", function () { if (hoveredId === id) hoveredId = null; });
   });
 })();
