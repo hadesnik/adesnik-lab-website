@@ -313,7 +313,7 @@
     if (kind === "blob") nu = { cx: x, cy: y, s, ang: 0, dend: "", tips: [], axonDir: 0 };
     else nu = kind === "p" ? pyramidal(rng, x, y, s, (adeg * Math.PI) / 180, id) : interneuron(rng, x, y, s, id);
     bucket.push(nu.dend + somaMarkup(nu, id, kind));
-    cells[id] = { soma: null, dend: [], events: [], nextSpont: 0, dendWasActive: false, childEdges: [], base: layer.base, gain: layer.gain, dbase: layer.dbase, dgain: layer.dgain, dim: layer.dim, bright: layer.bright, hasDend: kind !== "blob", hx: x, hy: y, hr: Math.max(12, 10 * s) };
+    cells[id] = { soma: null, dend: [], events: [], nextSpont: 0, dendWasActive: false, childEdges: [], base: layer.base, gain: layer.gain, dbase: layer.dbase, dgain: layer.dgain, dim: layer.dim, bright: layer.bright, hasDend: kind !== "blob", drives: kind === "p", hx: x, hy: y, hr: Math.max(12, 10 * s) };
     return { id, nu };
   }
 
@@ -374,7 +374,8 @@
   cells.forEach((c) => { c.nextSpont = rngE() * ISI_MAX; });
   function fire(i, t, depth, forceDend) {
     const c = cells[i]; c.events.push({ t0: t, dend: forceDend || rngE() < P_DEND }); if (c.events.length > 8) c.events.shift();
-    if (depth < MAXDEPTH) for (const j of c.childEdges) if (rngE() < P_TX) { edges[j].pulseT0 = t; scheduled.push({ cell: edges[j].dst, time: t + T_W, depth: depth + 1 }); }
+    // Only pyramidal cells drive downstream activation; interneurons (non-pyramidal) don't propagate.
+    if (c.drives && depth < MAXDEPTH) for (const j of c.childEdges) if (rngE() < P_TX) { edges[j].pulseT0 = t; scheduled.push({ cell: edges[j].dst, time: t + T_W, depth: depth + 1 }); }
   }
 
   // Occasional field-wide waves of activity: from a random seed point an
@@ -403,7 +404,7 @@
     if (hoveredId != null) {
       if (now - lastHoverFire > HOVER_INTERVAL) { fire(hoveredId, now, 0, true); lastHoverFire = now; }
       // Held on one neuron > 2s → seed a field wave from it; 5s refractory per neuron.
-      if (now - hoverStart > 2 && now >= (cells[hoveredId].wRefr || 0)) { launchWave(now, cells[hoveredId].hx, cells[hoveredId].hy); cells[hoveredId].wRefr = now + 5; }
+      if (now - hoverStart > 2 && cells[hoveredId].drives && now >= (cells[hoveredId].wRefr || 0)) { launchWave(now, cells[hoveredId].hx, cells[hoveredId].hy); cells[hoveredId].wRefr = now + 5; }
     }
     for (let i = 0; i < cells.length; i++) if (now >= cells[i].nextSpont) { fire(i, cells[i].nextSpont, 0); cells[i].nextSpont = now + ISI_MIN + rngE() * (ISI_MAX - ISI_MIN); }
     for (let k = scheduled.length - 1; k >= 0; k--) if (now >= scheduled[k].time) { const s = scheduled[k]; scheduled.splice(k, 1); fire(s.cell, s.time, s.depth); }
