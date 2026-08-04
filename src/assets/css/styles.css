@@ -375,6 +375,11 @@ p {
 .hero__motif .dof2 {
   filter: blur(4px);
 }
+/* Invisible per-neuron hit targets: the motif is click-through except these,
+   so hovering a cell body flashes it (see main.js). */
+.hero__motif .hit {
+  pointer-events: all;
+}
 
 /* ---------- Generic grids / cards ---------- */
 .grid {

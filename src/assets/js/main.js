@@ -349,7 +349,12 @@
     waves += '<path class="spark spark--halo" data-ax="' + j + '" pathLength="100" d="' + e.trunkD + '" style="stroke-width:3.6;stroke-dasharray:5 400"/>';
     waves += '<path class="spark" data-ax="' + j + '" pathLength="100" d="' + e.trunkD + '" style="stroke-width:1.5;stroke-dasharray:2.5 400"/>';
   });
-  inner += "<g>" + waves + "</g></g>";
+  let hits = "";
+  focal.forEach(function (f) {
+    const r = Math.max(14, 12 * f.nu.s);
+    hits += '<circle class="hit" data-cell="' + f.id + '" cx="' + R(f.nu.cx) + '" cy="' + R(f.nu.cy) + '" r="' + r.toFixed(1) + '" fill="transparent"/>';
+  });
+  inner += "<g>" + waves + "</g><g>" + hits + "</g></g>";
   svg.innerHTML = inner;
 
   svg.querySelectorAll(".cyto").forEach((el) => { cells[+el.dataset.cell].soma = el; });
@@ -366,8 +371,8 @@
   const rngE = mulberry32(99);
   const scheduled = [];
   cells.forEach((c) => { c.nextSpont = rngE() * ISI_MAX; });
-  function fire(i, t, depth) {
-    const c = cells[i]; c.events.push({ t0: t, dend: rngE() < P_DEND }); if (c.events.length > 8) c.events.shift();
+  function fire(i, t, depth, forceDend) {
+    const c = cells[i]; c.events.push({ t0: t, dend: forceDend || rngE() < P_DEND }); if (c.events.length > 8) c.events.shift();
     if (depth < MAXDEPTH) for (const j of c.childEdges) if (rngE() < P_TX) { edges[j].pulseT0 = t; scheduled.push({ cell: edges[j].dst, time: t + T_W, depth: depth + 1 }); }
   }
 
@@ -409,4 +414,17 @@
   } else {
     start();
   }
+
+  // Hover-to-fire: mousing over (or tapping) a cell body flashes it and lets the
+  // spike propagate to its targets. Guarded so a slow pointer sweeping across
+  // overlapping cells doesn't retrigger the same cell many times per second.
+  svg.querySelectorAll(".hit").forEach(function (el) {
+    const id = +el.dataset.cell;
+    el.addEventListener("pointerenter", function () {
+      const evs = cells[id].events;
+      const last = evs.length ? evs[evs.length - 1].t0 : -9;
+      if (simTime - last < 0.2) return;
+      fire(id, simTime, 0, true);
+    });
+  });
 })();
