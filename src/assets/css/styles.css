@@ -338,7 +338,10 @@ p {
   width: 100%;
   height: 100%;
   z-index: 1;
-  pointer-events: none;
+  /* Receives pointer/touch so tapping fires the nearest neuron (main.js);
+     the headline/buttons sit above (z-index 2) and keep working. */
+  pointer-events: auto;
+  touch-action: manipulation;
 }
 .hero__motif .dend {
   fill: none;
@@ -374,11 +377,6 @@ p {
 }
 .hero__motif .dof2 {
   filter: blur(4px);
-}
-/* Invisible per-neuron hit targets: the motif is click-through except these,
-   so hovering a cell body flashes it (see main.js). */
-.hero__motif .hit {
-  pointer-events: all;
 }
 /* The hero shows a bullseye "target" cursor (set in main.js); keep the CTA
    buttons on a normal pointer so they still read as clickable. */

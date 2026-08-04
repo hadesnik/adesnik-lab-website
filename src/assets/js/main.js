@@ -350,13 +350,7 @@
     waves += '<path class="spark spark--halo" data-ax="' + j + '" pathLength="100" d="' + e.trunkD + '" style="stroke-width:3.6;stroke-dasharray:5 400"/>';
     waves += '<path class="spark" data-ax="' + j + '" pathLength="100" d="' + e.trunkD + '" style="stroke-width:1.5;stroke-dasharray:2.5 400"/>';
   });
-  // A hit target over every cell (all layers), so aiming at any neuron — sharp
-  // or in the defocused volume, left or right — fires it.
-  let hits = "";
-  cells.forEach(function (c, id) {
-    hits += '<circle class="hit" data-cell="' + id + '" cx="' + R(c.hx) + '" cy="' + R(c.hy) + '" r="' + c.hr.toFixed(1) + '" fill="transparent"/>';
-  });
-  inner += "<g>" + waves + "</g><g>" + hits + "</g></g>";
+  inner += "<g>" + waves + "</g></g>";
   svg.innerHTML = inner;
 
   svg.querySelectorAll(".cyto").forEach((el) => { cells[+el.dataset.cell].soma = el; });
@@ -437,17 +431,36 @@
   const cursor = 'url("data:image/svg+xml,' + encodeURIComponent(reticle) + '") 16 16, crosshair';
   // Reticle over the whole hero banner (buttons restore the pointer via CSS).
   if (svg.parentElement) svg.parentElement.style.cursor = cursor;
-  svg.querySelectorAll(".hit").forEach(function (el) {
-    const id = +el.dataset.cell;
-    el.addEventListener("pointerenter", function () { hoveredId = id; });
-    el.addEventListener("pointerleave", function () { if (hoveredId === id) hoveredId = null; });
-    // Touch/tap (and click): fire immediately on press — mobile has no hover, and
-    // a quick tap clears the hover state before the loop catches it. Holding a
-    // finger down keeps firing via hoveredId until release.
-    el.addEventListener("pointerdown", function () { hoveredId = id; fire(id, simTime, 0, true); lastHoverFire = simTime; });
+
+  // Coordinate-based firing: map the pointer/touch to viewBox space and act on
+  // the nearest cell. This is robust on touch, where per-element SVG hit-testing
+  // under a pointer-events:none ancestor is unreliable (iOS Safari). The SVG
+  // itself receives the events (pointer-events:auto in CSS); the headline/buttons
+  // sit above it (z-index) and keep working.
+  function nearest(clientX, clientY, pad) {
+    const rect = svg.getBoundingClientRect();
+    if (!rect.width) return -1;
+    const sc = Math.max(rect.width / 1200, rect.height / 700); // preserveAspectRatio slice
+    const vx = (clientX - rect.left - (rect.width - 1200 * sc) / 2) / sc;
+    const vy = (clientY - rect.top - (rect.height - 700 * sc) / 2) / sc;
+    let best = -1, bestD = 1e9;
+    for (let i = 0; i < cells.length; i++) { const c = cells[i]; const dx = c.hx - vx, dy = c.hy - vy, d = dx * dx + dy * dy; if (d < bestD) { bestD = d; best = i; } }
+    if (best < 0) return -1;
+    const thr = cells[best].hr + pad;
+    return bestD <= thr * thr ? best : -1;
+  }
+  let touchDown = false;
+  svg.addEventListener("pointerdown", function (e) {
+    touchDown = true;
+    const id = nearest(e.clientX, e.clientY, e.pointerType === "mouse" ? 4 : 18);
+    if (id >= 0) { hoveredId = id; fire(id, simTime, 0, true); lastHoverFire = simTime; }
   });
-  // Release the hold on touch/pen so a lifted finger stops firing (mouse keeps
-  // its hover). pointercancel (e.g. a scroll takes over) always releases.
-  document.addEventListener("pointerup", function (e) { if (e.pointerType !== "mouse") hoveredId = null; });
-  document.addEventListener("pointercancel", function () { hoveredId = null; });
+  svg.addEventListener("pointermove", function (e) {
+    if (e.pointerType === "mouse") { const id = nearest(e.clientX, e.clientY, 4); hoveredId = id >= 0 ? id : null; }
+    else if (touchDown) { const id = nearest(e.clientX, e.clientY, 18); if (id >= 0) hoveredId = id; }
+  });
+  svg.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") hoveredId = null; });
+  function release(e) { touchDown = false; if (!e || e.pointerType !== "mouse") hoveredId = null; }
+  svg.addEventListener("pointerup", release);
+  svg.addEventListener("pointercancel", release);
 })();
