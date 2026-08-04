@@ -429,14 +429,14 @@
     '<path d="M16 1.5V7M16 25v5.5M1.5 16H7M25 16h5.5"/></g>' +
     '<circle cx="16" cy="16" r="1.4" fill="#e0a93b"/></svg>';
   const cursor = 'url("data:image/svg+xml,' + encodeURIComponent(reticle) + '") 16 16, crosshair';
+  const hero = svg.parentElement || svg;
   // Reticle over the whole hero banner (buttons restore the pointer via CSS).
-  if (svg.parentElement) svg.parentElement.style.cursor = cursor;
+  hero.style.cursor = cursor;
 
   // Coordinate-based firing: map the pointer/touch to viewBox space and act on
-  // the nearest cell. This is robust on touch, where per-element SVG hit-testing
-  // under a pointer-events:none ancestor is unreliable (iOS Safari). The SVG
-  // itself receives the events (pointer-events:auto in CSS); the headline/buttons
-  // sit above it (z-index) and keep working.
+  // the nearest cell. Listeners are on the .hero section (not the SVG) so events
+  // bubble up from whichever child is topmost — on mobile the full-width headline
+  // container covers the SVG, so SVG-attached handlers never fired on touch.
   function nearest(clientX, clientY, pad) {
     const rect = svg.getBoundingClientRect();
     if (!rect.width) return -1;
@@ -450,17 +450,17 @@
     return bestD <= thr * thr ? best : -1;
   }
   let touchDown = false;
-  svg.addEventListener("pointerdown", function (e) {
+  hero.addEventListener("pointerdown", function (e) {
     touchDown = true;
-    const id = nearest(e.clientX, e.clientY, e.pointerType === "mouse" ? 4 : 18);
+    const id = nearest(e.clientX, e.clientY, e.pointerType === "mouse" ? 4 : 22);
     if (id >= 0) { hoveredId = id; fire(id, simTime, 0, true); lastHoverFire = simTime; }
   });
-  svg.addEventListener("pointermove", function (e) {
+  hero.addEventListener("pointermove", function (e) {
     if (e.pointerType === "mouse") { const id = nearest(e.clientX, e.clientY, 4); hoveredId = id >= 0 ? id : null; }
-    else if (touchDown) { const id = nearest(e.clientX, e.clientY, 18); if (id >= 0) hoveredId = id; }
+    else if (touchDown) { const id = nearest(e.clientX, e.clientY, 22); if (id >= 0) hoveredId = id; }
   });
-  svg.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") hoveredId = null; });
+  hero.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") hoveredId = null; });
   function release(e) { touchDown = false; if (!e || e.pointerType !== "mouse") hoveredId = null; }
-  svg.addEventListener("pointerup", release);
-  svg.addEventListener("pointercancel", release);
+  hero.addEventListener("pointerup", release);
+  hero.addEventListener("pointercancel", release);
 })();
