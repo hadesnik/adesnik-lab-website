@@ -441,5 +441,13 @@
     const id = +el.dataset.cell;
     el.addEventListener("pointerenter", function () { hoveredId = id; });
     el.addEventListener("pointerleave", function () { if (hoveredId === id) hoveredId = null; });
+    // Touch/tap (and click): fire immediately on press — mobile has no hover, and
+    // a quick tap clears the hover state before the loop catches it. Holding a
+    // finger down keeps firing via hoveredId until release.
+    el.addEventListener("pointerdown", function () { hoveredId = id; fire(id, simTime, 0, true); lastHoverFire = simTime; });
   });
+  // Release the hold on touch/pen so a lifted finger stops firing (mouse keeps
+  // its hover). pointercancel (e.g. a scroll takes over) always releases.
+  document.addEventListener("pointerup", function (e) { if (e.pointerType !== "mouse") hoveredId = null; });
+  document.addEventListener("pointercancel", function () { hoveredId = null; });
 })();
