@@ -341,7 +341,12 @@
   const dof1Str = []; sample(rng, 42, 0, false, 0).forEach(function (p) { const kind = rng() < 0.55 ? "p" : "i"; addNeuron(p[0], p[1], 0.9 + rng() * 0.5, kind, kind === "p" ? -90 + (rng() - 0.5) * 30 : 0, L_DOF1, dof1Str); });
   const dof2Str = []; sample(rng, 60, 0, false, 0).forEach(function (p) { addNeuron(p[0], p[1], 1.0 + rng() * 0.8, "blob", 0, L_DOF2, dof2Str); });
 
-  let inner = '<g opacity="0.6">';
+  // Native SVG blur for the defocused volume layers. CSS filter:blur() on SVG
+  // groups doesn't render in iOS Safari (shows sharp circles); feGaussianBlur does.
+  let inner = '<defs>' +
+    '<filter id="dofb1" x="-6%" y="-6%" width="112%" height="112%"><feGaussianBlur stdDeviation="2"/></filter>' +
+    '<filter id="dofb2" x="-8%" y="-8%" width="116%" height="116%"><feGaussianBlur stdDeviation="4.4"/></filter>' +
+    '</defs><g opacity="0.6">';
   inner += '<g class="dof2" opacity=".8">' + dof2Str.join("") + "</g>";
   inner += '<g class="dof1">' + dof1Str.join("") + "</g>";
   inner += '<g style="opacity:.30">' + edges.map((e) => e.markup).join("") + "</g>";
@@ -387,7 +392,10 @@
       const c = cells[i];
       for (let e = c.events.length - 1; e >= 0; e--) if (now - c.events[e].t0 > 2.3) c.events.splice(e, 1);
       let bv = c.base; for (const ev of c.events) bv += c.gain * transS(now - ev.t0);
-      c.soma.style.fill = fillOf(c, clamp(bv, 0, 1));
+      bv = Math.round(clamp(bv, 0, 1) * 100) / 100;
+      // Only repaint on change so a blurred layer isn't re-rendered every frame
+      // (native SVG blur re-blurs the whole group on any child change).
+      if (bv !== c.lastBv) { c.soma.style.fill = fillOf(c, bv); c.lastBv = bv; }
       if (c.hasDend) {
         const active = c.events.some((ev) => ev.dend && now - ev.t0 < 2.3);
         if (active) { for (const seg of c.dend) { let o = c.dbase; for (const ev of c.events) if (ev.dend) o += c.dgain * transD(now - ev.t0 - seg.delay); seg.el.style.opacity = clamp(o, 0, D_MAX); } c.dendWasActive = true; }

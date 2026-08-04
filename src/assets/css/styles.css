@@ -372,11 +372,13 @@ p {
   stroke: #ffce85;
   filter: blur(1.8px);
 }
+/* Defocused volume layers — native SVG blur (CSS filter:blur() on SVG groups
+   fails to render in iOS Safari, showing sharp circles). */
 .hero__motif .dof1 {
-  filter: blur(1.9px);
+  filter: url(#dofb1);
 }
 .hero__motif .dof2 {
-  filter: blur(4px);
+  filter: url(#dofb2);
 }
 /* The hero shows a bullseye "target" cursor (set in main.js); keep the CTA
    buttons on a normal pointer so they still read as clickable. */
