@@ -275,32 +275,25 @@ p {
 .hero {
   position: relative;
   overflow: hidden;
-  background: var(--navy-900);
   color: #eaf1f8;
+  /* Deep navy ground with a warm gold glow top-right, matching the calcium
+     neuron field that animates over it (see .hero__motif + main.js). */
+  background:
+    radial-gradient(120% 120% at 88% 8%, rgba(224, 169, 59, 0.14), transparent 46%),
+    linear-gradient(100deg, #001122 0%, #001a34 46%, #002443 100%);
 }
-/* Photo lives on its own oversized layer so JS can parallax-translate it;
-   the extra vertical bleed prevents edge reveal at max translation. */
-.hero__bg {
-  position: absolute;
-  inset: -40% 0 -15%;
-  z-index: 0;
-  background: url("/assets/images/hero-brain.jpg") center / cover no-repeat;
-  will-change: transform;
-  pointer-events: none;
-}
+/* A soft left-side scrim so the headline stays legible over the neuron field. */
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 1;
   background: linear-gradient(
-      100deg,
-      rgba(0, 18, 36, 0.95) 0%,
-      rgba(0, 22, 44, 0.82) 42%,
-      rgba(0, 20, 40, 0.46) 72%,
-      rgba(0, 20, 40, 0.3) 100%
-    ),
-    radial-gradient(120% 120% at 88% 8%, rgba(224, 169, 59, 0.22), transparent 46%);
+    100deg,
+    rgba(0, 15, 30, 0.72) 0%,
+    rgba(0, 18, 36, 0.4) 40%,
+    rgba(0, 20, 40, 0) 66%
+  );
   pointer-events: none;
 }
 .hero__inner {
@@ -335,35 +328,52 @@ p {
   color: #c2d0de;
   max-width: 46ch;
 }
-/* Decorative neural network motif */
+/* Live calcium-imaging neuron field (populated by the hero-neurons engine in
+   main.js). Full-bleed behind the headline; parts are styled here, animated
+   there. Somas are opaque and brighten by fill (not alpha) so dendrites read
+   as emerging from the cell body. */
 .hero__motif {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.28;
 }
-.hero__motif line {
-  stroke: rgba(224, 169, 59, 0.35);
-  stroke-width: 1;
+.hero__motif .dend {
+  fill: none;
+  stroke: #ffe0a6;
+  stroke-linecap: butt;
+  opacity: 0.1;
 }
-.hero__motif circle {
-  fill: rgba(255, 255, 255, 0.9);
+.hero__motif .cyto {
+  opacity: 1;
+  fill: #6a5a3a;
 }
-.hero__motif circle.node--gold {
-  fill: var(--gold);
+.hero__motif .axon {
+  fill: none;
+  stroke: #e0a93b;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
-.hero__motif .pulse {
-  animation: nodePulse 4s ease-in-out infinite;
+.hero__motif .bouton {
+  fill: #e0a93b;
 }
-@keyframes nodePulse {
-  0%,
-  100% {
-    opacity: 0.35;
-  }
-  50% {
-    opacity: 1;
-  }
+.hero__motif .spark {
+  fill: none;
+  stroke: #fff3d6;
+  stroke-linecap: round;
+  stroke-dashoffset: 8;
+}
+.hero__motif .spark--halo {
+  stroke: #ffce85;
+  filter: blur(1.8px);
+}
+.hero__motif .dof1 {
+  filter: blur(1.9px);
+}
+.hero__motif .dof2 {
+  filter: blur(4px);
 }
 
 /* ---------- Generic grids / cards ---------- */
