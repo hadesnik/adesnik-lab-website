@@ -540,6 +540,7 @@ p {
 }
 .pub__journal {
   font-style: italic;
+  font-weight: 700;
 }
 
 /* ---------- CTA band ---------- */
