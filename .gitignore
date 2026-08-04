@@ -8,3 +8,6 @@ npm-debug.log*
 old website images/
 movies/
 previews/
+
+# Raw downloaded originals (site assets live in src/assets/images/)
+downloaded images/
