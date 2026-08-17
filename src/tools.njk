@@ -16,13 +16,13 @@ intro: Interactive tools we have built for designing and interpreting all-optica
         <li class="tool" data-reveal>
           <div class="tool__head">
             <h2 class="tool__title">
-              <a href="{{ t.url }}" rel="noopener">{{ t.title }}</a>
+              <a href="{{ t.url }}" target="_blank" rel="noopener">{{ t.title }}</a>
             </h2>
             {% if t.tag %}<span class="tool__tag">{{ t.tag }}</span>{% endif %}
           </div>
           <p class="tool__summary">{{ t.summary }}</p>
           <p class="tool__links">
-            <a href="{{ t.url }}" rel="noopener">{{ t.linkLabel or "Open tool" }}</a>
+            <a href="{{ t.url }}" target="_blank" rel="noopener">{{ t.linkLabel or "Open tool" }}</a>
           </p>
         </li>
       {% endfor %}
