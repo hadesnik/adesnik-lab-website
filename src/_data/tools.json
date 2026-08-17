@@ -1,0 +1,12 @@
+{
+  "intro": "Interactive tools and calculators we have built for designing and interpreting all-optical experiments. They run entirely in the browser — nothing is installed, and nothing you enter leaves your machine.",
+  "items": [
+    {
+      "title": "Photostimulation Design Explorer",
+      "summary": "An interactive design tool for two-photon holographic photostimulation. Turn the knobs on objective, beam shaping, power, opsin, and tissue, and watch the excitation volume, the optical versus physiological point-spread function, the usable field of view, and the trade-off between recruiting every target and driving off-target neurons. Every curve is computed live from a scalar diffraction model of a temporally focused, diffuser-based spot rather than interpolated from stored results.",
+      "url": "https://claude.ai/code/artifact/8555ae1d-4355-41a4-bf54-872f9452eac5",
+      "linkLabel": "Open the explorer",
+      "tag": "Interactive"
+    }
+  ]
+}

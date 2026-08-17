@@ -12,6 +12,7 @@
     { "label": "Lab Members", "url": "/lab-members/" },
     { "label": "Publications", "url": "/publications/" },
     { "label": "Positions", "url": "/positions/" },
+    { "label": "Tools", "url": "/tools/" },
     { "label": "Funding", "url": "/funding/" },
     { "label": "Contact", "url": "/contact/" }
   ],

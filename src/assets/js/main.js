@@ -381,7 +381,7 @@
   // Occasional field-wide waves of activity: from a random seed point an
   // expanding front sweeps the whole field, firing each cell as it passes.
   // Speed is set so the front reaches the farthest cell in WAVE_TRAVERSE seconds.
-  const WAVE_MIN = 4, WAVE_MAX = 9.6, WAVE_TRAVERSE = 2;
+  const WAVE_MIN = 10, WAVE_MAX = 24, WAVE_TRAVERSE = 2;
   const fieldWaves = [];
   let nextWave = 4; // first wave a few seconds in
   function launchWave(now, sx, sy) {

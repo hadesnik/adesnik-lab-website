@@ -1,0 +1,31 @@
+---
+layout: layouts/page.njk
+permalink: /tools/
+heroImage: /assets/images/hero-brain.jpg
+title: Tools
+eyebrow: Resources
+intro: Interactive tools we have built for designing and interpreting all-optical experiments.
+---
+
+<section class="section">
+  <div class="wrap measure-wide">
+    {% if tools.intro %}<p class="tools-intro">{{ tools.intro }}</p>{% endif %}
+
+    <ul class="tool-list">
+      {% for t in tools.items %}
+        <li class="tool" data-reveal>
+          <div class="tool__head">
+            <h2 class="tool__title">
+              <a href="{{ t.url }}" rel="noopener">{{ t.title }}</a>
+            </h2>
+            {% if t.tag %}<span class="tool__tag">{{ t.tag }}</span>{% endif %}
+          </div>
+          <p class="tool__summary">{{ t.summary }}</p>
+          <p class="tool__links">
+            <a href="{{ t.url }}" rel="noopener">{{ t.linkLabel or "Open tool" }}</a>
+          </p>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
