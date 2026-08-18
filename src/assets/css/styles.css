@@ -803,17 +803,6 @@ p {
   transform: scale(1.02);
   box-shadow: var(--shadow-lift);
 }
-.feature__media::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(
-    rgba(224, 169, 59, 0.5) 1.2px,
-    transparent 1.4px
-  );
-  background-size: 20px 20px;
-  opacity: 0.45;
-}
 .feature__num {
   position: relative;
   font-family: var(--font-display);
