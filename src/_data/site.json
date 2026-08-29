@@ -2,8 +2,8 @@
   "title": "Adesnik Lab",
   "shortName": "Adesnik Lab",
   "institution": "University of California, Berkeley",
-  "tagline": "Our laboratory aims to reveal the neural basis of perception.",
-  "description": "The Adesnik Lab at UC Berkeley studies how cortical microcircuits process sensory information to generate perception, using optical technologies to read and write neural activity with cellular resolution.",
+  "tagline": "Our laboratory aims to reveal the neural basis of cognition.",
+  "description": "The Adesnik Lab at UC Berkeley studies how cortical circuits transform sensory information into cognitive representations that guide behavior, building advanced optical tools to read and write neural activity with cellular resolution across very large populations of neurons in the living brain.",
   "url": "https://adesnik.berkeley.edu",
   "logo": "/assets/images/adesnik-lab-logo.png",
   "nav": [
