@@ -247,6 +247,15 @@ p {
   border-color: var(--gold);
   color: var(--gold);
 }
+/* Outline button for light sections (.btn--ghost is white, for dark ones). */
+.btn--outline {
+  border-color: var(--line);
+  color: var(--navy);
+}
+.btn--outline:hover {
+  border-color: var(--gold);
+  color: var(--gold-bright);
+}
 .btn-row {
   display: flex;
   flex-wrap: wrap;
@@ -487,6 +496,17 @@ p {
 .theme-card__body h3 {
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
+}
+/* The whole card reads as one link target; the title carries the underline. */
+.theme-card__link {
+  color: inherit;
+  text-decoration: none;
+}
+.theme-card__link:hover {
+  color: var(--navy);
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-underline-offset: 3px;
 }
 .theme-card__body p {
   color: var(--muted);
@@ -789,6 +809,7 @@ p {
 .feature__media {
   position: relative;
   overflow: hidden;
+  text-decoration: none;
   aspect-ratio: 4 / 3;
   border-radius: var(--radius);
   background: linear-gradient(150deg, var(--navy), var(--navy-900));
@@ -817,6 +838,94 @@ p {
   color: var(--muted);
   font-size: 1.05rem;
   margin: 0;
+}
+/* Focus-area titles link through to that area's selected-papers page. */
+.feature__link {
+  color: inherit;
+  text-decoration: none;
+}
+.feature__link:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-underline-offset: 4px;
+}
+.feature__more {
+  margin-top: 1rem;
+}
+.feature__more a {
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--navy);
+  text-decoration: none;
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 2px;
+}
+.feature__more a:hover {
+  color: var(--gold-bright);
+  border-bottom-color: var(--gold-bright);
+}
+
+/* ---------- Research theme detail page ---------- */
+.breadcrumb {
+  margin: 0 0 2rem;
+  font-size: 0.95rem;
+}
+.breadcrumb a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.breadcrumb a:hover {
+  color: var(--gold-bright);
+}
+.pub-detail-list {
+  list-style: none;
+  margin: 2rem 0 3rem;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+  counter-reset: none;
+}
+.pub-detail {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 1.25rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--line);
+}
+.pub-detail__num {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  line-height: 1;
+  color: var(--gold);
+}
+.pub-detail__title {
+  font-size: clamp(1.15rem, 1rem + 0.5vw, 1.4rem);
+  line-height: 1.3;
+  margin: 0 0 0.45rem;
+}
+.pub-detail__title a {
+  color: inherit;
+  text-decoration: none;
+}
+.pub-detail__title a:hover {
+  color: var(--gold-bright);
+}
+.pub-detail__meta {
+  margin: 0 0 0.9rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.pub-detail__summary {
+  margin: 0 0 1rem;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  max-width: 62ch;
+}
+@media (max-width: 640px) {
+  .pub-detail {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
 }
 
 /* People */

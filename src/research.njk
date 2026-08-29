@@ -20,15 +20,18 @@ heroImage: /assets/images/research-banner.jpg
     <div class="features">
       {% for theme in research.themes %}
         <article class="feature {% if loop.index is even %}feature--reverse{% endif %}" data-reveal>
-          <div
-            class="feature__media"
+          <a class="feature__media" href="/research/{{ theme.slug }}/"
             {% if theme.image %}style="background-image:url('{{ theme.image }}')"{% endif %}
+            aria-label="{{ theme.title }}: selected papers"
           >
             {% if not theme.image %}<span class="feature__num">0{{ loop.index }}</span>{% endif %}
-          </div>
+          </a>
           <div class="feature__body">
-            <h3>{{ theme.title }}</h3>
+            <h3><a class="feature__link" href="/research/{{ theme.slug }}/">{{ theme.title }}</a></h3>
             <p>{{ theme.summary }}</p>
+            <p class="feature__more">
+              <a href="/research/{{ theme.slug }}/">Selected papers in this area →</a>
+            </p>
           </div>
         </article>
       {% endfor %}

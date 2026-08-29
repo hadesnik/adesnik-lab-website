@@ -3,21 +3,90 @@
   "themes": [
     {
       "title": "Visual Cortical Processing",
+      "slug": "visual-cortical-processing",
       "summary": "How do neural circuits enable visual recognition, tracking, and scene segmentation? We use large-scale recordings and targeted optical perturbations in rodents — and higher species — to dissect how cortical microcircuits transform sensory input into perception.",
       "image": "/assets/images/research-visual-cortex.jpg",
-      "imageAlt": "Green fluorescent neurons imaged in the visual cortex"
+      "imageAlt": "Green fluorescent neurons imaged in the visual cortex",
+      "papers": [
+        {
+          "title": "The logic of recurrent circuits in the primary visual cortex",
+          "summary": "Ensemble-specific two-photon optogenetics in the mouse visual cortex isolated the influence of recurrent cortical activity from that of external visual input. The spatial arrangement and feature preference of a stimulated ensemble jointly determined its net effect: photoactivation suppressed cells beyond 30 µm but uniformly activated closer, similarly tuned cells, while among non-similarly tuned cells compact co-tuned ensembles drove suppression and diffuse co-tuned ensembles drove activation. Computational modeling suggested that highly local recurrent excitatory connectivity together with selective convergence onto inhibitory neurons explains this logic."
+        },
+        {
+          "title": "Feature-tuned synaptic inputs to somatostatin interneurons drive context-dependent processing",
+          "summary": "Single-cell and population-level physiological recordings were combined with perturbation methods to map a context-dependent cortical computation onto the synaptic microarchitecture of mouse primary visual cortex. The work demonstrated a precise like-to-like pattern of synaptic connectivity from cortical pyramidal cells onto somatostatin (SST) inhibitory interneurons. This connectivity rule explains the visual encoding properties of SST cells and the context-driven figure/ground modulation they support, which may underlie the earliest stages of scene segmentation."
+        },
+        {
+          "title": "Cortical gamma band synchronization through somatostatin interneurons",
+          "summary": "Most circuit models hold that soma-targeting parvalbumin interneurons are the essential subtype for gamma rhythms, but cell-type-specific optogenetic manipulations in behaving animals showed that dendrite-targeting somatostatin (SOM) interneurons are critical for a visually induced, context-dependent gamma rhythm in visual cortex. A computational model independently predicted this dependence, and further experiments showed SOM neurons are required for long-distance coherence across the visual cortex. By operating through dendritic rather than only somatic inhibition, SOM-mediated oscillations establish an alternative mechanism for synchronizing distributed cortical networks."
+        },
+        {
+          "title": "A neural circuit for spatial summation in visual cortex",
+          "summary": "In contrast to pyramidal cells, somatostatin-expressing inhibitory neurons (SOMs) in the superficial layers of mouse visual cortex increase their responses when the receptive-field surround is stimulated. This difference results from the preferential excitation of SOMs by horizontal cortical axons. Perturbing SOM activity showed that these neurons contribute to surround suppression in pyramidal cells, establishing a cortical circuit for surround suppression and attributing a specific function to a genetically defined inhibitory neuron type."
+        },
+        {
+          "title": "Lateral competition for cortical space by layer-specific horizontal circuits",
+          "summary": "Horizontal projections interconnect neighboring cortical domains and allow sensory features to be processed in a context-dependent manner, but how they coordinate activity across domains was poorly understood. Selectively activating horizontal projection neurons in mouse somatosensory cortex revealed that these projections suppress superficial layers while simultaneously activating the deeper cortical output layers. This layer-specific modulation arises not from a spatial separation of excitation and inhibition but from a layer-specific ratio between the two opposing conductances, a mechanism through which cortical domains compete for cortical space."
+        }
+      ]
     },
     {
-      "title": "Visual learning & memory",
-      "summary": "We develop all-optical electrophysiology to map synaptic changes across thousands of neurons over an animal's lifespan, asking how learning reshapes the neural networks that support object recognition and memory.",
+      "title": "Optical brain machine interfacing",
+      "slug": "optical-brain-machine-interfacing",
+      "summary": "We build optical brain–machine interfaces that read and write neural activity with cellular resolution and millisecond precision across large volumes of the brain, engineering new opsins, holographic photostimulation, and all-optical read–write systems that can place arbitrary activity patterns into cortical circuits.",
       "image": "/assets/images/research-learning-memory.jpg",
-      "imageAlt": "Neurons co-expressing a green calcium indicator and a red optogenetic actuator for all-optical control"
+      "imageAlt": "Neurons co-expressing a green calcium indicator and a red optogenetic actuator for all-optical control",
+      "papers": [
+        {
+          "title": "Probing inter-areal computations with a cellular resolution two-photon holographic mesoscope",
+          "summary": "Brain computation depends on intricately connected yet highly distributed networks, and causally testing hypotheses about inter-areal processing had remained largely out of reach for lack of the necessary technology. This work developed a two-photon holographic mesoscope that simultaneously reads and writes neural activity patterns with near-single-cell resolution across large regions of the mouse cortex. Spatial and temporal sequences of neurons were precisely photoactivated in one or multiple cortical areas while the downstream effects were read out in several other regions, establishing mesoscale holographic optogenetics as a platform for mapping functional connectivity and causal interactions across distributed cortical areas."
+        },
+        {
+          "title": "High-performance microbial opsins for spatially and temporally precise perturbations of large neuronal networks",
+          "summary": "The biophysical properties of existing optogenetic tools constrain the scale, speed, and fidelity of precise optogenetic control, so structure-guided mutagenesis was used to engineer opsins with very high potency that retain fast kinetics. The new opsins were extensively benchmarked against existing tools, with a detailed biophysical characterization of a diverse opsin family under two-photon illumination that serves as a resource for matching an opsin to an experiment's goals and constraints. Combined with optimized holographic photostimulation, they allowed several hundred spatially defined neurons to be co-activated with a single hologram, and nearly twice that number by temporally interleaving holograms at fast rates."
+        },
+        {
+          "title": "All-optical recreation of naturalistic neural activity with a multifunctional transgenic reporter mouse",
+          "summary": "Determining which features of the neural code drive behavior requires simultaneously reading out and writing in activity patterns with high precision across many neurons, but existing all-optical systems could not both read and write cell-specific firing rates. This work introduced a genetic line of mice for Cre-dependent co-expression of a calcium indicator and a potent soma-targeted microbial opsin. Using that line, it developed a method for reading out and writing in precise population vectors of neural activity by calibrating the photostimulation to each individual cell."
+        },
+        {
+          "title": "Precise multimodal optical control of neural ensemble activity",
+          "summary": "A multiphoton holographic approach was developed to activate or suppress the activity of ensembles of cortical neurons with cellular resolution and sub-millisecond precision. Because existing opsins were inadequate, the work engineered new soma-targeted optogenetic tools, ST-ChroME and IRES-ST-eGtACR1, optimized for multiphoton activation and suppression. Using a three-dimensional all-optical read–write interface, up to 50 neurons distributed in three dimensions across a 550 × 550 × 100 µm³ volume of brain tissue were photostimulated simultaneously, allowing complex neural activity patterns to be synthesized and edited."
+        },
+        {
+          "title": "Three-dimensional scanless holographic optogenetics with temporal focusing (3D-SHOT)",
+          "summary": "Manipulating neural activity with cellular resolution and millisecond precision in three dimensions requires optical methods that existing approaches for targeting individual neurons could not deliver. 3D-SHOT is a multiphoton photo-excitation method that precisely and simultaneously photo-activates arbitrary sets of neurons anywhere within the addressable volume of a microscope, using point-cloud holography to place multiple copies of a temporally focused disc matched to the dimensions of a neuron's cell body. Experiments in cultured cells, brain slices, and living mice demonstrated single-neuron spatial resolution even when targeting randomly distributed groups of neurons in three dimensions."
+        }
+      ]
     },
     {
       "title": "Sensory experience",
+      "slug": "sensory-experience",
       "summary": "How does sensory processing give rise to conscious experience? Using visual illusions, precise neural perturbations, and behavioral psychophysics, we probe the brain's internal model and the link between cortical activity and what an animal perceives.",
       "image": "/assets/images/research-subjective-experience.jpg",
-      "imageAlt": "Fluorescently labeled cortical neurons"
+      "imageAlt": "Fluorescently labeled cortical neurons",
+      "papers": [
+        {
+          "title": "Acute requirement for the hippocampus in putatively conscious vision revealed by a mouse model of blindsight",
+          "summary": "Blindsight — detecting and locating visual stimuli without the conscious experience of seeing — offers a route to the brain areas required for conscious vision, and this work reports the first mouse model of it, showing that removing V1 causes mice to lose putatively conscious vision only when the thalamic dLGN is damaged as well. Using this model, acutely suppressing the hippocampus produced blindsight-like behavior, implicating the hippocampus in conscious but not unconscious vision. Selective ablation of either V1 or the hippocampus alone had only a minor effect while simultaneous ablation caused blindsight-like behavior, revealing a form of plasticity in which the two areas can compensate for the permanent loss of the other."
+        },
+        {
+          "title": "Recurrent pattern completion drives the neocortical representation of sensory inference",
+          "summary": "When sensory information is incomplete the brain relies on prior expectations to infer perceptual objects, and this work combined illusory contours, multi-Neuropixels recordings, mesoscale two-photon calcium imaging, and two-photon holographic optogenetics in mice to reveal the underlying codes and circuits. It discovered a specialized subset of primary visual cortex neurons that respond emergently to illusory bars but not to the component image segments. Selective holographic photoactivation of these \"IC-encoders\" recreated the visual representation of illusory contours in V1 in the absence of any visual stimulus, implying that pattern-completion circuits in lower cortical areas selectively reinforce activity patterns matching prior expectations."
+        },
+        {
+          "title": "Network influence determines the impact of cortical ensembles on stimulus detection",
+          "summary": "Two-photon imaging was combined with cellular-resolution holographic optogenetic photostimulation to causally test how neural activity in the mouse visual cortex is read out to detect visual stimuli. Contrary to expectations, targeted activation of visually sensitive ensembles did not preferentially modify behavior compared with targeting randomly selected ensembles; instead, an activated ensemble's effect on local network activity was the main predictor of its impact on perception. This suggests that downstream regions summate visual cortex activity without preferentially weighting more informative neurons, challenging conventional notions of how sensory representations mediate perception."
+        },
+        {
+          "title": "Integration during active tactile sensation drives orientation perception",
+          "summary": "Optogenetics, two-photon imaging, and high-speed behavioral tracking were combined in mice solving a whisker-based object orientation discrimination task. Orientation discrimination required animals to summate input from multiple whiskers specifically along the whisker arc, and performance was invariant to the location of the presented stimulus, indicating that animals discriminated the orientation of the stimulus per se. Populations of barrel cortex neurons summated across whiskers to encode each orientation, and acute optogenetic inactivation of barrel cortex, as well as cell-type-specific suppression of layer 4 excitatory neurons, degraded performance."
+        },
+        {
+          "title": "Surround integration organizes a spatial map during active sensation",
+          "summary": "During active sensation the sensors scan space, yet because spatial coding is typically measured in a fixed, sensor-based coordinate frame the cortical representation of scanned space was poorly understood. Two-photon imaging and electrophysiology during active touch in the rodent whisker system showed that surround whiskers powerfully transform the cortical representation of scanned space, with surround input profoundly altering response amplitude and modulating spatial preference in single neurons. At the population level, surround input organizes the spatial preference of neurons into a continuous map of the space swept out by the whiskers."
+        }
+      ]
     }
   ]
 }

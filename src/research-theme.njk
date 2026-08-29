@@ -1,0 +1,41 @@
+---
+# One page per research focus area, generated from research.themes.
+# Each page lists that area's five selected papers; the paper metadata itself
+# is pulled from publications.json so it never drifts from the publications page.
+layout: layouts/page.njk
+pagination:
+  data: research.themes
+  size: 1
+  alias: theme
+permalink: "/research/{{ theme.slug }}/"
+eleventyComputed:
+  title: "{{ theme.title }}"
+  heroImage: "{{ theme.image }}"
+  eyebrow: "Research · Area of focus"
+  intro: "{{ theme.summary }}"
+  description: "{{ theme.summary }}"
+---
+
+{% from "components/cards.njk" import pubDetail %}
+
+<section class="section">
+  <div class="wrap measure-wide">
+    <p class="breadcrumb"><a href="/research/">← All areas of focus</a></p>
+
+    <div class="section-head">
+      <h2>Selected papers</h2>
+      <p class="lead">Five papers that define our work on {{ theme.title | lower }}.</p>
+    </div>
+
+    <ol class="pub-detail-list">
+      {% for paper in theme.papers %}
+        {{ pubDetail(publications | pubByTitle(paper.title), paper.summary, loop.index) }}
+      {% endfor %}
+    </ol>
+
+    <div class="btn-row">
+      <a class="btn btn--gold" href="/publications/">All publications</a>
+      <a class="btn btn--outline" href="/research/">Other research areas</a>
+    </div>
+  </div>
+</section>

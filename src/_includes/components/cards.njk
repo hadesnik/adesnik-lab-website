@@ -48,6 +48,30 @@
 </article>
 {%- endmacro -%}
 
+{# A single paper on a research-theme page: the publication record from
+   publications.json plus a short plain-language summary from research.json. #}
+{%- macro pubDetail(pub, summary, index) -%}
+<li class="pub-detail" data-reveal>
+  <span class="pub-detail__num" aria-hidden="true">{{ "0" ~ index }}</span>
+  <div class="pub-detail__body">
+    <h3 class="pub-detail__title">
+      {%- set link = pub | pubLink -%}
+      {% if link %}<a href="{{ link }}">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}
+    </h3>
+    <p class="pub-detail__meta">
+      {{ pub.authors }} · <span class="pub__journal">{{ pub.journal }}</span>
+      {%- if pub.volume %} {{ pub.volume }}{% endif %} · {{ pub.year }}
+    </p>
+    <p class="pub-detail__summary">{{ summary }}</p>
+    <p class="pub__links">
+      {% if link %}<a href="{{ link }}">Read the paper</a>{% endif %}
+      {% if pub.pdf %}<a href="{{ pub.pdf }}" target="_blank" rel="noopener">PDF</a>{% endif %}
+      {% if pub.pmid %}<a href="https://pubmed.ncbi.nlm.nih.gov/{{ pub.pmid }}/">PubMed</a>{% endif %}
+    </p>
+  </div>
+</li>
+{%- endmacro -%}
+
 {%- macro pubItem(pub) -%}
 <li class="pub" data-search="{{ (pub.title ~ ' ' ~ pub.authors ~ ' ' ~ pub.journal ~ ' ' ~ pub.year) | lower }}">
   <span class="pub__year">{{ pub.year }}</span>
