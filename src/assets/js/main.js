@@ -227,8 +227,22 @@
   const L_DOF1 = { base: 0.14, gain: 0.7, dbase: 0.09, dgain: 0.7, dim: [96, 82, 54], bright: [200, 175, 128] };
   const L_DOF2 = { base: 0.12, gain: 0.55, dbase: 0, dgain: 0, dim: [82, 70, 46], bright: [165, 142, 104] };
 
-  function transS(tau) { if (tau < 0 || tau > 2.2) return 0; const Rt = 0.05; return tau < Rt ? tau / Rt : Math.exp(-(tau - Rt) / 0.5); }
-  function transD(tau) { if (tau < 0 || tau > 2.2) return 0; const Rt = 0.04; return (tau < Rt ? tau / Rt : Math.exp(-(tau - Rt) / 0.42)) * 0.6; }
+  // Calcium-transient waveform. A normalized difference of exponentials, which
+  // is the shape a real GCaMP transient takes: a smoothly rounded rise into the
+  // peak rather than a linear ramp with a corner at the top. The peak lands at
+  // t_peak = (τr·τd/(τd−τr))·ln(τd/τr), so τr = 0.15 / τd = 1.0 s peaks at
+  // ~0.33 s and is most of the way back to baseline ~1 s later (GCaMP6s-like).
+  // Dendrites decay a little faster than somas so the arbor fades first.
+  // TAIL is where the transient is truncated; at 5 s it is already under 1% of
+  // peak, so the cut is below the 0.01 quantization step used when painting.
+  const TAU_R = 0.15, TAU_D = 1.0, TAU_D_DEND = 0.85, TAIL = 5;
+  function peakNorm(tr, td) {
+    const tp = ((tr * td) / (td - tr)) * Math.log(td / tr);
+    return 1 / (Math.exp(-tp / td) - Math.exp(-tp / tr));
+  }
+  const A_SOMA = peakNorm(TAU_R, TAU_D), A_DEND = peakNorm(TAU_R, TAU_D_DEND);
+  function transS(tau) { if (tau < 0 || tau > TAIL) return 0; return A_SOMA * (Math.exp(-tau / TAU_D) - Math.exp(-tau / TAU_R)); }
+  function transD(tau) { if (tau < 0 || tau > TAIL) return 0; return A_DEND * (Math.exp(-tau / TAU_D_DEND) - Math.exp(-tau / TAU_R)) * 0.6; }
 
   // recursive dendrite; leaf endpoints collected so axons can target dendrites;
   // each segment carries a bAP delay ∝ its path distance from the soma.
@@ -416,16 +430,29 @@
     }
     for (let i = 0; i < cells.length; i++) {
       const c = cells[i];
-      for (let e = c.events.length - 1; e >= 0; e--) if (now - c.events[e].t0 > 2.3) c.events.splice(e, 1);
+      for (let e = c.events.length - 1; e >= 0; e--) if (now - c.events[e].t0 > TAIL) c.events.splice(e, 1);
       let bv = c.base; for (const ev of c.events) bv += c.gain * transS(now - ev.t0);
       bv = Math.round(clamp(bv, 0, 1) * 100) / 100;
       // Only repaint on change so a blurred layer isn't re-rendered every frame
       // (native SVG blur re-blurs the whole group on any child change).
       if (bv !== c.lastBv) { c.soma.style.fill = fillOf(c, bv); c.lastBv = bv; }
       if (c.hasDend) {
-        const active = c.events.some((ev) => ev.dend && now - ev.t0 < 2.3);
-        if (active) { for (const seg of c.dend) { let o = c.dbase; for (const ev of c.events) if (ev.dend) o += c.dgain * transD(now - ev.t0 - seg.delay); seg.el.style.opacity = clamp(o, 0, D_MAX); } c.dendWasActive = true; }
-        else if (c.dendWasActive) { for (const seg of c.dend) seg.el.style.opacity = c.dbase; c.dendWasActive = false; }
+        const active = c.events.some((ev) => ev.dend && now - ev.t0 < TAIL);
+        // Quantize to 0.01 and only touch the DOM when a segment actually
+        // changes: the slower transient keeps each arbor "active" for longer,
+        // and blind per-frame opacity writes across every segment are the
+        // dominant cost in this loop.
+        if (active) {
+          for (const seg of c.dend) {
+            let o = c.dbase; for (const ev of c.events) if (ev.dend) o += c.dgain * transD(now - ev.t0 - seg.delay);
+            o = Math.round(clamp(o, 0, D_MAX) * 100) / 100;
+            if (o !== seg.lastO) { seg.el.style.opacity = o; seg.lastO = o; }
+          }
+          c.dendWasActive = true;
+        } else if (c.dendWasActive) {
+          for (const seg of c.dend) if (seg.lastO !== c.dbase) { seg.el.style.opacity = c.dbase; seg.lastO = c.dbase; }
+          c.dendWasActive = false;
+        }
       }
     }
     for (const e of edges) {
