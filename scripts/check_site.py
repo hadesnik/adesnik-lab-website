@@ -330,6 +330,16 @@ SET_DOMAIN_STEPS = [
     'certificate (a few minutes, occasionally up to an hour), then tick "Enforce HTTPS".',
 ]
 
+# Needed when GitHub refuses the custom domain because another account has verified
+# berkeley.edu, which covers its immediate subdomains (as happened in October 2026).
+VERIFY_STEP = (
+    'If GitHub refuses with "You must verify your domain", verify it for your account '
+    f'first: at https://github.com/settings/pages click "Add a domain" and enter {SITE_HOST}. '
+    "GitHub shows a TXT record; ask department IT to add it (their record name: "
+    f"_github-pages-challenge-hadesnik.{SITE_HOST}). Once it is live, click Verify there, "
+    "then do the previous step again. Verifying also stops anyone else claiming the domain."
+)
+
 DNS_RECORD = f"    {SITE_HOST}.  CNAME  {GITHUB_PAGES_HOST}."
 
 ASK_IT_STEP = (
@@ -530,7 +540,10 @@ def diagnose_home_page(f, d, home, cfg):
         pages_switched_off = f.pages_config is None and f.pages_config_error == "HTTP 404"
         if f.pages_config is not None and not cname:
             d.explanation.append(
-                "Confirmed: the repository's Pages settings currently have no custom domain."
+                "Confirmed: the repository's Pages settings currently have no custom domain. "
+                "One known way it disappears: when any GitHub account verifies berkeley.edu "
+                "for GitHub Pages, GitHub immediately removes berkeley.edu's subdomains, "
+                f"including {SITE_HOST}, from everyone else's sites."
             )
         elif pages_switched_off:
             d.explanation.append(
@@ -560,21 +573,16 @@ def diagnose_home_page(f, d, home, cfg):
         )
         if cname != SITE_HOST:
             d.explanation.append(
-                f"Security: while no repository claims {SITE_HOST}, any GitHub user could "
-                "attach it to their own Pages site and serve their content on the lab's "
-                "address, so fix this promptly."
+                f"Security: until {SITE_HOST} is verified for your own GitHub account, another "
+                "account may be able to attach it to their Pages site and serve their content "
+                "on the lab's address, so fix this promptly."
             )
         if pages_switched_off:
             d.steps.append(
                 f'At {PAGES_SETTINGS_URL}, set "Build and deployment > Source" to "GitHub '
                 'Actions", then re-run the deploy (see the Deploy runs link below).'
             )
-        d.steps += SET_DOMAIN_STEPS
-        d.steps.append(
-            "To block anyone else from claiming the domain in future, verify it for your "
-            "GitHub account at https://github.com/settings/pages (\"Add a domain\"). GitHub "
-            "gives you a TXT record for department IT to add."
-        )
+        d.steps += [SET_DOMAIN_STEPS[0], VERIFY_STEP, SET_DOMAIN_STEPS[1]]
 
     elif home.status == 404 and "page not found" in title and "github" in title:
         d.headline = "Visitors see GitHub's \"Page not found\" error (HTTP 404) on the home page."
