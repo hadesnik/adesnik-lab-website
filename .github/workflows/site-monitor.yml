@@ -1,0 +1,49 @@
+name: Site monitor
+
+# Once a day, check that https://adesnik.berkeley.edu loads properly. If it doesn't,
+# scripts/check_site.py emails hadesnik@berkeley.edu ("Adesnik web site outage") with a
+# diagnosis and suggested fixes. A red run here means the site was down at check time.
+on:
+  schedule:
+    # 15:17 UTC = 8:17 AM Pacific in summer (7:17 AM in winter). Off the hour on purpose:
+    # GitHub delays scheduled runs at the top of the hour, when everyone's cron fires.
+    - cron: "17 15 * * *"
+  workflow_dispatch:
+    inputs:
+      test_email:
+        description: Send a [TEST] email even if the site is up (checks the email setup)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  pages: read # read the repo's custom-domain setting, for the diagnosis
+  actions: write # read the deploy runs, and keep this schedule alive (last step)
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the site (emails a diagnosis if it is down)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }} # optional; default smtp.gmail.com
+          SMTP_PORT: ${{ secrets.SMTP_PORT }} # optional; default 465
+          ALERT_TO: ${{ vars.ALERT_TO }} # optional; default hadesnik@berkeley.edu
+        run: python3 scripts/check_site.py ${{ inputs.test_email && '--test-email' || '' }}
+
+      # GitHub switches off scheduled workflows in public repos after 60 days without a
+      # commit, which for a lab site can easily happen. Re-enabling the workflow through the
+      # API resets that clock (the approach the keepalive-workflow action uses), so the
+      # monitor keeps running through quiet stretches.
+      - name: Keep this schedule alive
+        if: always() && github.event_name == 'schedule'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/site-monitor.yml/enable"

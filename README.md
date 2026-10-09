@@ -53,6 +53,29 @@ The site goes live at a `https://<account>.github.io/<repo>/` URL immediately. T
 Pages; then add a `CNAME` file containing `adesnik.berkeley.edu` and set the custom domain in
 Settings → Pages.
 
+## Uptime monitor
+
+`.github/workflows/site-monitor.yml` runs [`scripts/check_site.py`](scripts/check_site.py)
+every morning (~8 AM Pacific). It checks DNS, the HTTPS certificate, the home page and key
+pages, and the stylesheet. If the site isn't loading properly, it emails
+**hadesnik@berkeley.edu** (subject "Adesnik web site outage") with a diagnosis and suggested
+fixes. A red run in the Actions tab means the site was down at check time.
+
+Email is sent over SMTP using repository secrets. One-time setup, with a Gmail account:
+
+1. Create an app password at <https://myaccount.google.com/apppasswords> (needs 2-Step
+   Verification on that Google account).
+2. Store the account and app password as secrets (each command prompts for the value):
+   ```bash
+   gh secret set SMTP_USERNAME -R hadesnik/adesnik-lab-website   # the Gmail address
+   gh secret set SMTP_PASSWORD -R hadesnik/adesnik-lab-website   # the 16-letter app password
+   ```
+3. Send a test: Actions → Site monitor → Run workflow → tick "Send a [TEST] email".
+
+Optional: secrets `SMTP_HOST` / `SMTP_PORT` for a non-Gmail server, and a repository
+*variable* `ALERT_TO` to change the recipient. Run a check locally (prints the email
+without sending it) with `python3 scripts/check_site.py --dry-run`.
+
 ## Project structure
 
 ```
@@ -66,6 +89,7 @@ src/
   *.njk             one file per page
 .eleventy.js        Eleventy config
 scripts/shot.js     dev-only screenshot/QA helper (Puppeteer)
+scripts/check_site.py  daily uptime check + outage email (see "Uptime monitor")
 ```
 
 ## Notes for maintainers
