@@ -33,14 +33,14 @@
       "src": "/assets/videos/photostim-fireworks.mp4",
       "poster": "/assets/videos/photostim-fireworks.jpg",
       "title": "Fireworks drawn in neural activity with two-photon photostimulation",
-      "caption": "Spiral, ring, heart and rocket patterns targeted with the two-photon DMD/SLM pathway. Trial-averaged ΔF/F, 5× real time.",
+      "caption": "Spiral, ring, heart and rocket patterns. Trial-averaged ΔF/F, 5× real time.",
       "autoplay": true
     },
     {
       "src": "/assets/videos/photostim-stick-figure.mp4",
       "poster": "/assets/videos/photostim-stick-figure.jpg",
       "title": "Stick-figure animation in neural activity",
-      "caption": "Each frame of the animation is projected with the two-photon DMD/SLM pathway. Trial-averaged ΔF/F, 3× real time.",
+      "caption": "Trial-averaged ΔF/F, 3× real time.",
       "autoplay": true
     },
     {
