@@ -1,5 +1,5 @@
 {
-  "intro": "A few movies from our microscopes — neural activity and imaging from the lab.",
+  "intro": "A few movies from our microscopes — neural activity, imaging and two-photon photostimulation from the lab.",
   "items": [
     {
       "src": "/assets/videos/two-photon-imaging.mp4",
@@ -27,6 +27,34 @@
       "poster": "/assets/videos/elevation-map-3hz.jpg",
       "title": "Cortical elevation map (first pass, 3 Hz)",
       "caption": "",
+      "autoplay": true
+    },
+    {
+      "src": "/assets/videos/photostim-fireworks.mp4",
+      "poster": "/assets/videos/photostim-fireworks.jpg",
+      "title": "Fireworks drawn in neural activity with two-photon photostimulation",
+      "caption": "Spiral, ring, heart and rocket patterns targeted with the two-photon DMD/SLM pathway. Trial-averaged ΔF/F, 5× real time.",
+      "autoplay": true
+    },
+    {
+      "src": "/assets/videos/photostim-stick-figure.mp4",
+      "poster": "/assets/videos/photostim-stick-figure.jpg",
+      "title": "Stick-figure animation in neural activity",
+      "caption": "Each frame of the animation is projected with the two-photon DMD/SLM pathway. Trial-averaged ΔF/F, 3× real time.",
+      "autoplay": true
+    },
+    {
+      "src": "/assets/videos/photostim-wavefront.mp4",
+      "poster": "/assets/videos/photostim-wavefront.jpg",
+      "title": "Travelling wavefront of two-photon photostimulation",
+      "caption": "A band of stimulation sweeps around the field of view. Trial-averaged ΔF/F.",
+      "autoplay": true
+    },
+    {
+      "src": "/assets/videos/photostim-ensembles.mp4",
+      "poster": "/assets/videos/photostim-ensembles.jpg",
+      "title": "Two-photon photostimulation of random neuronal ensembles",
+      "caption": "Twenty ensembles of individually targeted cell bodies, stimulated in turn. Trial-averaged ΔF/F, 3× real time.",
       "autoplay": true
     }
   ]
