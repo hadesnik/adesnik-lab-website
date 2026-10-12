@@ -39,7 +39,7 @@ const url = baseUrl.replace(/\/$/, "") + route;
     const nv = document.querySelector(".primary-nav");
     return {
       innerWidth: window.innerWidth,
-      mqMobile: window.matchMedia("(max-width: 860px)").matches,
+      mqMobile: window.matchMedia("(max-width: 960px)").matches,
       toggleDisplay: tg ? getComputedStyle(tg).display : "(none found)",
       navDisplay: nv ? getComputedStyle(nv).display : "(none found)",
       docScrollW: document.documentElement.scrollWidth,

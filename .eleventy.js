@@ -34,6 +34,16 @@ module.exports = function (eleventyConfig) {
     return match;
   });
 
+  // "2026-10-07" -> "October 7, 2026" (parsed as UTC so the day never shifts).
+  eleventyConfig.addFilter("readableDate", (iso) =>
+    new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: "UTC",
+    })
+  );
+
   // Year of the build, so the publications page can split papers into rolling
   // "recent" vs "earlier" buckets that re-sort themselves on each rebuild.
   eleventyConfig.addGlobalData("buildYear", () => new Date().getFullYear());

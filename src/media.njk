@@ -1,0 +1,38 @@
+---
+layout: layouts/page.njk
+permalink: /media/
+heroImage: /assets/images/hero-brain.jpg
+title: In the Media
+eyebrow: Press
+intro: Our research, explained for non-specialists.
+---
+
+<section class="section">
+  <div class="wrap measure-wide">
+    {% if media.intro %}<p class="tools-intro">{{ media.intro }}</p>{% endif %}
+
+    <ul class="press-list">
+      {% for m in media.items %}
+        <li class="press" data-reveal>
+          <p class="press__meta">
+            <span class="press__outlet">{{ m.outlet }}</span>
+            <time datetime="{{ m.date }}">{{ m.date | readableDate }}</time>
+            {% if m.type %}<span class="tool__tag">{{ m.type }}</span>{% endif %}
+          </p>
+          <h2 class="press__title">
+            <a href="{{ m.url }}" target="_blank" rel="noopener">{{ m.title }}</a>
+          </h2>
+          {% if m.author %}<p class="press__byline">By {{ m.author }}</p>{% endif %}
+          {% if m.summary %}<p class="press__summary">{{ m.summary }}</p>{% endif %}
+          {% if m.paper %}
+            {% set pub = publications | pubByTitle(m.paper) %}
+            <p class="press__paper">
+              The paper: <a href="{{ pub | pubLink }}" target="_blank" rel="noopener"><cite>{{ pub.title }}</cite></a>
+              — {{ pub.journal }}, {{ pub.year }}
+            </p>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>

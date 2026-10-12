@@ -1,0 +1,117 @@
+{
+  "intro": "Stories about our research written for a general audience, from science news outlets and university press offices. Newest first.",
+  "items": [
+    {
+      "title": "Holographic mesoscope reads, writes from different cortical regions simultaneously",
+      "outlet": "The Transmitter",
+      "author": "Simon Makin",
+      "date": "2026-10-07",
+      "url": "https://www.thetransmitter.org/brain-imaging/holographic-mesoscope-reads-writes-from-different-cortical-regions-simultaneously/",
+      "summary": "The tool could help reveal how information transmission between areas relates to perception, cognition and behavior.",
+      "paper": "Probing inter-areal computations with a cellular resolution two-photon holographic mesoscope"
+    },
+    {
+      "title": "Holographic optogenetics could enable faster brain mapping for new discoveries",
+      "outlet": "Medical Xpress",
+      "author": "Ingrid Fadelli",
+      "date": "2025-11-03",
+      "url": "https://medicalxpress.com/news/2025-10-holographic-optogenetics-enable-faster-brain.html",
+      "summary": "Coverage of a collaboration between the Paninski and Adesnik labs on using holographic stimulation of neural ensembles, together with compressed sensing, to map synaptic connectivity much faster.",
+      "paper": "Rapid learning of neural circuitry from holographic ensemble stimulation enabled by model-based compressed sensing"
+    },
+    {
+      "title": "Bombarding Brain Cells with Lasers, Scientists Pinpoint the Source of Illusions, Revealing New Insights Into Schizophrenia",
+      "outlet": "The Debrief",
+      "author": "Ryan Whalen",
+      "date": "2025-09-16",
+      "url": "https://thedebrief.org/bombarding-brain-cells-with-lasers-scientists-pinpoint-the-source-of-illusions-revealing-new-insights-into-schizophrenia/",
+      "summary": "How a small set of neurons in visual cortex lets the brain fill in edges that aren’t really there — and what that could mean for understanding hallucinations.",
+      "paper": "Recurrent pattern completion drives the neocortical representation of sensory inference"
+    },
+    {
+      "title": "Scientists shine a laser light on the brain cells that show us illusions",
+      "outlet": "GeekWire",
+      "author": "Alan Boyle",
+      "date": "2025-09-15",
+      "url": "https://www.geekwire.com/2025/laser-light-brain-cells-illusions/",
+      "summary": "Researchers at UC Berkeley and Seattle’s Allen Institute identify the “illusion neurons” that help the brain see shapes that aren’t actually present.",
+      "paper": "Recurrent pattern completion drives the neocortical representation of sensory inference"
+    },
+    {
+      "title": "Brain illusion: US scientists use lasers to reveal how we see what isn’t there",
+      "outlet": "Interesting Engineering",
+      "author": "Mrigakshi Dixit",
+      "date": "2025-09-15",
+      "url": "https://interestingengineering.com/health/brain-illusion-lasers-reveal-mind-tricks",
+      "summary": "Stimulating “IC-encoder” neurons with light recreated the brain activity of viewing an optical illusion, even with no illusion on the screen.",
+      "paper": "Recurrent pattern completion drives the neocortical representation of sensory inference"
+    },
+    {
+      "title": "Scientists shoot lasers into brain cells to uncover how illusions work",
+      "outlet": "Allen Institute",
+      "author": "Peter Kim",
+      "date": "2025-09-15",
+      "url": "https://alleninstitute.org/news/scientists-shoot-lasers-into-brain-cells-to-uncover-how-illusions-work",
+      "summary": "Supported by the Allen Institute’s OpenScope program, the findings could help us better understand neuropsychiatric disorders like schizophrenia and reshape our understanding of vision.",
+      "type": "Press release",
+      "paper": "Recurrent pattern completion drives the neocortical representation of sensory inference"
+    },
+    {
+      "title": "Null and Noteworthy: Downstream brain areas read visual cortex signals en masse in mice",
+      "outlet": "The Transmitter",
+      "author": "Laura Dattaro",
+      "date": "2025-07-31",
+      "url": "https://www.thetransmitter.org/null-and-noteworthy/null-and-noteworthy-downstream-brain-areas-read-visual-cortex-signals-en-masse-in-mice/",
+      "summary": "The finding contradicts a theory that the regions prioritize neurons that are adept at identifying specific stimuli.",
+      "paper": "Network influence determines the impact of cortical ensembles on stimulus detection"
+    },
+    {
+      "title": "Mind-blowing science: ‘Star Wars-style’ holograms to communicate with the brain",
+      "outlet": "EurekAlert! (Chan Zuckerberg Biohub San Francisco)",
+      "date": "2024-03-19",
+      "url": "https://www.eurekalert.org/news-releases/1038344",
+      "summary": "On the holographic neurotechnology platform being developed by Hillel Adesnik, Laura Waller and Rikky Muller for two-way communication with the brain — what Hillel calls a “Hubble telescope for the brain.”",
+      "type": "Press release"
+    },
+    {
+      "title": "Researchers are developing a device that can edit brain activity",
+      "outlet": "The Next Web",
+      "author": "Tristan Greene",
+      "date": "2018-05-03",
+      "url": "https://thenextweb.com/news/researchers-are-developing-a-brain-editing-device-to-give-us-read-write-privileges-to-our-minds",
+      "summary": "How projecting holograms into the brain lets researchers switch groups of about 50 neurons on and off, hundreds of times per second.",
+      "paper": "Precise multimodal optical control of neural ensemble activity"
+    },
+    {
+      "title": "Editing brain activity with holography",
+      "outlet": "Berkeley News",
+      "date": "2018-04-30",
+      "url": "https://news.berkeley.edu/2018/04/30/editing-brain-activity-with-holography/",
+      "summary": "UC Berkeley neuroscientists use holographic projection to activate or suppress dozens of neurons at once, copying real patterns of brain activity.",
+      "paper": "Precise multimodal optical control of neural ensemble activity"
+    },
+    {
+      "title": "A mouse’s view of the world, seen through its whiskers",
+      "outlet": "Berkeley News",
+      "date": "2017-06-27",
+      "url": "https://news.berkeley.edu/2017/06/27/a-mouses-view-of-the-world-seen-through-its-whiskers/",
+      "summary": "Neurons in the mouse somatosensory cortex build a smooth map of the space around the head as the whiskers scan it, not just a map of the whiskers themselves.",
+      "paper": "Surround integration organizes a spatial map during active sensation"
+    },
+    {
+      "title": "Incredible brain-controlling microscope revealed",
+      "outlet": "Medical News Today",
+      "author": "Tim Newman",
+      "date": "2016-04-07",
+      "url": "https://www.medicalnewstoday.com/articles/308733",
+      "summary": "A microscope that can watch the activity of individual brain cells with millisecond precision, and switch those same cells on and off with light."
+    },
+    {
+      "title": "Novel IR microscope can manipulate neural activity in live animals",
+      "outlet": "Laser Focus World",
+      "date": "2016-04-06",
+      "url": "https://www.laserfocusworld.com/biooptics/bioimaging/microscopy/article/14191769/novel-ir-microscope-can-manipulate-neural-activity-in-live-animals",
+      "summary": "An infrared microscope built at UC Berkeley that controls the firing of individual neurons in the living brain, to decode how neural signals give rise to brain function."
+    }
+  ]
+}

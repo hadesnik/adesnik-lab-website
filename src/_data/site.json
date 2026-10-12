@@ -11,6 +11,7 @@
     { "label": "Movies", "url": "/movies/" },
     { "label": "Lab Members", "url": "/lab-members/" },
     { "label": "Publications", "url": "/publications/" },
+    { "label": "Media", "url": "/media/" },
     { "label": "Positions", "url": "/positions/" },
     { "label": "Tools", "url": "/tools/" },
     { "label": "Funding", "url": "/funding/" },

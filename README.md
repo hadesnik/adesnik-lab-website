@@ -13,6 +13,7 @@ Almost all routine updates are edits to one file in [`src/_data/`](src/_data/):
 | Lab members             | [`src/_data/members.json`](src/_data/members.json) |
 | Alumni                  | [`src/_data/alumni.json`](src/_data/alumni.json)   |
 | Publications            | [`src/_data/publications.json`](src/_data/publications.json) |
+| Media / press coverage  | [`src/_data/media.json`](src/_data/media.json) |
 | Funding sources         | [`src/_data/funding.json`](src/_data/funding.json) |
 | Research themes         | [`src/_data/research.json`](src/_data/research.json) |
 | Nav, contact info, etc. | [`src/_data/site.json`](src/_data/site.json) |

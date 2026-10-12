@@ -303,6 +303,7 @@ p {
   font-size: 0.97rem;
   color: var(--navy-900);
   text-decoration: none;
+  white-space: nowrap;
   padding: 0.3rem 0;
   border-bottom: 2px solid transparent;
 }
@@ -659,6 +660,14 @@ p {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+  .cta .wrap {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* The full nav needs ~960px; collapse it to the menu button below that. */
+@media (max-width: 960px) {
   .nav-toggle {
     display: inline-flex;
     flex-direction: column;
@@ -714,10 +723,6 @@ p {
     display: block;
     padding: 0.9rem 0;
     border-bottom: none;
-  }
-  .cta .wrap {
-    flex-direction: column;
-    align-items: flex-start;
   }
 }
 
@@ -1421,6 +1426,61 @@ a.funder__link:hover {
 }
 .tool__links a::after {
   content: " \2192";
+}
+
+/* Media / press coverage */
+.press-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.press {
+  padding: 1.6rem 0;
+  border-top: 1px solid var(--line);
+}
+.press:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.press__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem 0.8rem;
+  margin: 0 0 0.4rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.press__outlet {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+.press__title {
+  margin: 0;
+  font-size: 1.3rem;
+}
+.press__title a {
+  text-decoration: none;
+}
+.press__title a:hover {
+  text-decoration: underline;
+}
+.press__byline {
+  margin: 0.3rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.press__summary {
+  margin: 0.6rem 0 0;
+}
+.press__paper {
+  margin: 0.6rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.press__paper cite {
+  font-style: normal;
 }
 
 /* ---------- Interior responsive ---------- */
