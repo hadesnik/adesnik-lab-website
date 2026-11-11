@@ -36,12 +36,19 @@
       ]
     },
     {
+      "id": "medical-scientists",
+      "title": "Medical Scientists",
+      "people": [
+        { "name": "Daniel Quintana", "role": "Medical Scientist", "photo": "/assets/images/daniel-quintana.jpg", "bio": null, "links": {} }
+      ]
+    },
+    {
       "id": "undergraduates",
       "title": "Undergraduates",
       "people": [
         { "name": "Sarah Alwakeel", "role": "Undergraduate Researcher", "photo": null, "bio": null, "links": {} },
-        { "name": "Jade Bartley-Noza", "role": "Undergraduate Researcher", "photo": null, "bio": null, "links": {} },
-        { "name": "Lucas Chi", "role": "Undergraduate Researcher", "photo": null, "bio": null, "links": {} }
+        { "name": "Lucas Chi", "role": "Undergraduate Researcher", "photo": null, "bio": null, "links": {} },
+        { "name": "Audrey Watson", "role": "Undergraduate Researcher", "photo": null, "bio": null, "links": {} }
       ]
     }
   ]
